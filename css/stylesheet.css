@@ -1,0 +1,191 @@
+.navbar .navbar-brand > .navbar-item,
+.navbar .navbar-brand .navbar-link {
+    font-weight: bold;
+}
+
+/*
+* Custom Styles
+*/
+html,
+body {
+    height: 100%;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.new-footer {
+    background-color: #e5e5e5;
+    border-top: 1px solid #ccc;
+    padding: 1rem 1.5rem;
+}
+
+.hero {
+    display: inline-block;
+    width: 100%;
+}
+
+.hero.full-height {
+    height: 100%;
+}
+
+.hero:not(.inline) > .hero-content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.hero > .hero-content {
+    padding: 10rem;
+}
+
+.hero > .hero-content .hero-title {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 2px 2px rgba(34, 34, 34, 0.5);
+    margin-bottom: 10px;
+}
+
+.card > .card-header {
+    font-size: 0;
+    padding: 15px;
+}
+
+.card.primary > .card-header {
+    background-color: #158cba;
+    border-bottom: 4px solid #127ba3;
+    color: white;
+    text-shadow: 0 2px 2px rgba(34, 34, 34, 0.5);
+}
+
+.card > .card-header > .card-header-icon {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 100%;
+    width: 50px;
+}
+
+.card > .card-header > .card-header-icon img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+.card > .card-header > .card-header-title {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 100%;
+    width: calc(100% - 60px);
+}
+
+.card > .card-content {
+    padding: 15px;
+}
+
+.card > .card-header + .card-content {
+    padding-top: 10px;
+}
+
+.card > .card-footer {
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+
+.card > .card-footer > .card-footer-item {
+    color: #222;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    flex: 1;
+}
+
+.card > .card-footer > .card-footer-item:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.card > .card-footer > a.card-footer-item:hover {
+    background-color: rgba(34, 34, 34, 0.1);
+}
+
+.is-size-1 {
+    font-size: 3em;
+}
+
+.is-size-2 {
+    font-size: 2.5em;
+}
+
+.is-size-3 {
+    font-size: 2em;
+}
+
+.is-size-4 {
+    font-size: 1.5em;
+}
+
+.is-size-5 {
+    font-size: 1em;
+}
+
+.is-size-6 {
+    font-size: 0.5em;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+#wrapper {
+    height: 100%;
+}
+
+#wrapper > .sidebar li.content {
+    /*padding: 15px;*/
+}
+
+#wrapper > .sidebar li.content img {
+    width: 100%;
+}
+
+#wrapper > #page-wrapper {
+    padding: 0;
+    height: 100%;
+}
+
+#wrapper > #page-wrapper > #page-wrapper-content {
+    overflow-y: scroll;
+    padding: 15px;
+    height: 100%;
+}
+
+#wrapper > #page-wrapper > .navbar + #page-wrapper-content {
+    height: calc(100% - 54px);
+}
+
+#home-section {
+    background: linear-gradient(#3f3f3f, #222);
+    color: white;
+}
+
+#login-section,
+#registration-section,
+#forgot-password-section,
+#change-password-section {
+    /*background: linear-gradient(#158cba, #106282);*/
+    background: linear-gradient(#3f3f3f, #222);
+}
