@@ -70,8 +70,24 @@ function loadShippingAddressTable(start, limit) {
 }
 
 $(document).ready(function() {
-    loadBillingAddressTable((currentPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
-    loadShippingAddressTable((currentPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
+    loadBillingAddressTable((currentBillingAddressPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
+    loadShippingAddressTable((currentShippingAddressPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
+
+    $('body').on('change', '.billing-address-filter', function() {
+        tableBillingAddressLimit = parseInt($(this).find('option:selected').val());
+
+        loadBillingAddressTable((1 * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
+
+        return false;
+    });
+
+    $('body').on('change', '.shipping-address-filter', function() {
+        tableShippingAddressLimit = parseInt($(this).find('option:selected').val());
+
+        loadShippingAddressTable((1 * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
+
+        return false;
+    });
 
     $('body').on('click', '.billing-address-pagination a', function() {
         currentBillingAddressPaginationPage = parseInt($(this).attr('data-page'));
@@ -93,8 +109,60 @@ $(document).ready(function() {
         openModal('add-billing-address-modal');
     });
 
+    $('body').on('click', '#add-billing-address-modal .negative-button', function() {
+        $('#add-billing-address-form')[0].reset();
+
+        closeModal('add-billing-address-modal');
+    });
+
+    $('body').on('click', '#add-billing-address-modal .positive-button', function() {
+        closeModal('add-billing-address-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/add_billing_address.php', 'POST', $('#add-billing-address-form').serialize(), function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Add Billing Address', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+
+                if(response.status === 'Ok') {
+                    $('#add-billing-address-form')[0].reset();
+                    loadBillingAddressTable((currentBillingAddressPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
+                }
+            }, 2000);
+        });
+    });
+
     $('body').on('click', '.add-shipping-address-button', function() {
         openModal('add-shipping-address-modal');
+    });
+
+    $('body').on('click', '#add-shipping-address-modal .negative-button', function() {
+        $('#add-shipping-address-form')[0].reset();
+
+        closeModal('add-shipping-address-modal');
+    });
+
+    $('body').on('click', '#add-shipping-address-modal .positive-button', function() {
+        closeModal('add-shipping-address-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/add_shipping_address.php', 'POST', $('#add-shipping-address-form').serialize(), function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Add Shipping Address', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+
+                if(response.status === 'Ok') {
+                    $('#add-shipping-address-form')[0].reset();
+                    loadShippingAddressTable((currentShippingAddressPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
+                }
+            }, 2000);
+        });
     });
 
     $('body').on('click', '.remove-billing-address-button', function() {
@@ -122,7 +190,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 closeModal('status-modal');
-                loadBillingAddressTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                loadBillingAddressTable((currentBillingAddressPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
             }, 2000);
         });
     });
@@ -152,7 +220,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 closeModal('status-modal');
-                loadShippingAddressTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                loadShippingAddressTable((currentShippingAddressPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
             }, 2000);
         });
     });
