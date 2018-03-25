@@ -33,9 +33,24 @@
     </div>
 </nav>
 <div id="page-wrapper-content">
+    <?php
+        $userID = $_SESSION['user_id'];
+    
+        $query = mysqli_query($connection, "SELECT *,
+                `carts`.`id` AS `cart_id`
+            FROM `carts`
+            INNER JOIN `products`
+                ON `carts`.`product_id`=`products`.`id`
+            WHERE `carts`.`account_id`='$userID'");
+
+        if(mysqli_num_rows($query) > 0) {
+    ?>
     <div class="form-group text-right">
-        <button type="button" class="checkout-button btn btn-primary btn-lg"><span class="fas fa-check fa-fw"></span> Checkout</button>
+        <button type="button" class="checkout-button btn btn-primary"><span class="fas fa-check fa-fw"></span> Checkout</button>
     </div>
+    <?php
+        }
+    ?>
     <table id="carts-table" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -48,14 +63,6 @@
         <tbody>
             <?php
                 $totalAmount = 0;
-                $userID = $_SESSION['user_id'];
-
-                $query = mysqli_query($connection, "SELECT *,
-                        `carts`.`id` AS `cart_id`
-                    FROM `carts`
-                    INNER JOIN `products`
-                        ON `carts`.`product_id`=`products`.`id`
-                    WHERE `carts`.`account_id`='$userID'");
 
                 if(mysqli_num_rows($query) > 0) {
                     while($row = mysqli_fetch_assoc($query)) {
