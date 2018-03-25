@@ -3,6 +3,12 @@
     font-weight: bold;
 }
 
+.page-header {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
 /*
 * Custom Styles
 */
@@ -116,6 +122,14 @@ hr {
 
 .card > .card-footer > a.card-footer-item:hover {
     background-color: rgba(34, 34, 34, 0.1);
+}
+
+.nav-label {
+    border-bottom: 1px solid #e7e7e7;
+    color: #777;
+    font-weight: bold;
+    padding: 0 10px 5px 10px;
+    margin-top: 10px;
 }
 
 .is-size-1 {
