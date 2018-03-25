@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">Show</span>
-                            <select class="billing-address-filter form-control">
+                            <select class="billing-address-filter-table form-control">
                                 <option value="10" selected>10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">Show</span>
-                            <select class="shipping-address-filter form-control">
+                            <select class="shipping-address-filter-table form-control">
                                 <option value="10" selected>10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>

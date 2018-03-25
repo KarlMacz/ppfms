@@ -73,7 +73,7 @@ $(document).ready(function() {
     loadBillingAddressTable((currentBillingAddressPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
     loadShippingAddressTable((currentShippingAddressPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
 
-    $('body').on('change', '.billing-address-filter', function() {
+    $('body').on('change', '.billing-address-filter-table', function() {
         tableBillingAddressLimit = parseInt($(this).find('option:selected').val());
 
         loadBillingAddressTable((1 * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
@@ -81,7 +81,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('body').on('change', '.shipping-address-filter', function() {
+    $('body').on('change', '.shipping-address-filter-table', function() {
         tableShippingAddressLimit = parseInt($(this).find('option:selected').val());
 
         loadShippingAddressTable((1 * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
