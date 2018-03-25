@@ -1,4 +1,4 @@
-function loadTable(start, limit) {
+function loadTable() {
     ajaxRequest('../backend/ajax/table_cart.php', 'POST', {}, function(response) {
         $('#carts-table tbody').html('');
 
@@ -34,7 +34,7 @@ function loadTable(start, limit) {
 }
 
 $(document).ready(function() {
-    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+    loadTable();
 
     $('body').on('click', '.edit-button', function() {
         openModal('edit-quantity-modal', 'static');
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
                 setTimeout(function() {
                     closeModal('status-modal');
-                    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                    loadTable();
                 }, 2000);
             });
         }
@@ -101,7 +101,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 closeModal('status-modal');
-                loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                loadTable();
             }, 2000);
         });
     });
@@ -129,7 +129,7 @@ $(document).ready(function() {
 
                 setTimeout(function() {
                     closeModal('status-modal');
-                    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                    loadTable();
                 }, 2000);
             });
         }

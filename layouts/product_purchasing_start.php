@@ -1,7 +1,7 @@
 <div id="wrapper">
     <div class="sidebar" style="margin-top: 0;">
         <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
+            <ul class="nav">
                 <li class="content">
                     <img src="../img/logo.png">
                 </li>

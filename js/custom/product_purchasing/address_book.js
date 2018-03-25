@@ -75,16 +75,18 @@ $(document).ready(function() {
 
     $('body').on('change', '.billing-address-filter-table', function() {
         tableBillingAddressLimit = parseInt($(this).find('option:selected').val());
+        currentBillingAddressPaginationPage = 1;
 
-        loadBillingAddressTable((1 * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
+        loadBillingAddressTable((currentBillingAddressPaginationPage * tableBillingAddressLimit) - tableBillingAddressLimit, tableBillingAddressLimit);
 
         return false;
     });
 
     $('body').on('change', '.shipping-address-filter-table', function() {
         tableShippingAddressLimit = parseInt($(this).find('option:selected').val());
+        currentShippingAddressPaginationPage = 1;
 
-        loadShippingAddressTable((1 * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
+        loadShippingAddressTable((currentShippingAddressPaginationPage * tableShippingAddressLimit) - tableShippingAddressLimit, tableShippingAddressLimit);
 
         return false;
     });

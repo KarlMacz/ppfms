@@ -37,8 +37,9 @@ $(document).ready(function() {
 
     $('body').on('change', '.filter-table', function() {
         tableLimit = parseInt($(this).find('option:selected').val());
+        currentPaginationPage = 1;
 
-        loadTable((1 * tableLimit) - tableLimit, tableLimit);
+        loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
 
         return false;
     });
