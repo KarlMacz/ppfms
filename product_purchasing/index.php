@@ -33,6 +33,21 @@
     </div>
 </nav>
 <div id="page-wrapper-content">
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-9">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">Show</span>
+                    <select class="filter-table form-control">
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span class="input-group-addon">Entries</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <table id="products-table" class="table table-bordered table-striped">
         <thead>
             <tr>

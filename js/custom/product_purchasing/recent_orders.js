@@ -17,7 +17,7 @@ function loadTable(start, limit) {
             }
         } else {
             $('#orders-table tbody').append('<tr>\
-                    <td class="text-center" colspan="4">No results found.</td>\
+                    <td class="text-center" colspan="5">No results found.</td>\
                 </tr>');
         }
 
@@ -35,6 +35,14 @@ function loadTable(start, limit) {
 
 $(document).ready(function() {
     loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+
+    $('body').on('change', '.filter-table', function() {
+        tableLimit = parseInt($(this).find('option:selected').val());
+
+        loadTable((1 * tableLimit) - tableLimit, tableLimit);
+
+        return false;
+    });
 
     $('body').on('click', '.pagination a', function() {
         currentPaginationPage = parseInt($(this).attr('data-page'));

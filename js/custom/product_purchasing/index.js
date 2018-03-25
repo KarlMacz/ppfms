@@ -35,6 +35,14 @@ function loadTable(start, limit) {
 $(document).ready(function() {
     loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
 
+    $('body').on('change', '.filter-table', function() {
+        tableLimit = parseInt($(this).find('option:selected').val());
+
+        loadTable((1 * tableLimit) - tableLimit, tableLimit);
+
+        return false;
+    });
+
     $('body').on('click', '.pagination a', function() {
         currentPaginationPage = parseInt($(this).attr('data-page'));
 
