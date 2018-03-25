@@ -35,8 +35,25 @@
 <div id="page-wrapper-content">
     <div class="row">
         <div class="col-sm-6">
-            <div class="form-group text-right">
-                <button type="button" class="add-billing-address-button btn btn-primary btn-lg"><span class="fas fa-plus fa-fw"></span> Add Billing Address</button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <button type="button" class="add-billing-address-button btn btn-primary"><span class="fas fa-plus fa-fw"></span> Add Billing Address</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Show</span>
+                            <select class="billing-address-filter form-control">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span class="input-group-addon">Entries</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table id="billing-address-table" class="table table-bordered table-striped">
                 <thead>
@@ -53,8 +70,25 @@
             </nav>
         </div>
         <div class="col-sm-6">
-            <div class="form-group text-right">
-                <button type="button" class="add-shipping-address-button btn btn-primary btn-lg"><span class="fas fa-plus fa-fw"></span> Add Shipping Address</button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <button type="button" class="add-shipping-address-button btn btn-primary"><span class="fas fa-plus fa-fw"></span> Add Shipping Address</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Show</span>
+                            <select class="shipping-address-filter form-control">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span class="input-group-addon">Entries</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table id="shipping-address-table" class="table table-bordered table-striped">
                 <thead>
@@ -95,16 +129,29 @@
             </div>
             <div class="modal-body">
                 <form id="add-billing-address-form">
-                    <div>
-                        <input type="hidden" name="id" value="">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="billing-first-name-input">First Name:</label>
+                                <input type="text" name="first_name" id="billing-first-name-input" class="form-control" placeholder="First Name" required autofocus>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="billing-middle-name-input">Middle Name:</label>
+                                <input type="text" name="middle_name" id="billing-middle-name-input" class="form-control" placeholder="Middle Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="billing-last-name-input">Last Name:</label>
+                                <input type="text" name="last_name" id="billing-last-name-input" class="form-control" placeholder="Last Name" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Product Name:</label>
-                        <input type="text" id="name-input" class="form-control" value="" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity-input">Quantity:</label>
-                        <input type="number" step="any" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Quantity" required autofocus>
+                        <label for="billing-address-input">Address:</label>
+                        <input type="text" name="address" id="billing-address-input" class="form-control" placeholder="Address" required>
                     </div>
                 </form>
             </div>
@@ -128,26 +175,26 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="first-name-input">First Name:</label>
-                                <input type="text" name="first_name" id="first-name-input" class="form-control" placeholder="First Name" required autofocus>
+                                <label for="shipping-first-name-input">First Name:</label>
+                                <input type="text" name="first_name" id="shipping-first-name-input" class="form-control" placeholder="First Name" required autofocus>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="middle-name-input">Middle Name:</label>
-                                <input type="text" name="middle_name" id="middle-name-input" class="form-control" placeholder="Middle Name">
+                                <label for="shipping-middle-name-input">Middle Name:</label>
+                                <input type="text" name="middle_name" id="shipping-middle-name-input" class="form-control" placeholder="Middle Name">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="last-name-input">Last Name:</label>
-                                <input type="text" name="last_name" id="last-name-input" class="form-control" placeholder="Last Name" required>
+                                <label for="shipping-last-name-input">Last Name:</label>
+                                <input type="text" name="last_name" id="shipping-last-name-input" class="form-control" placeholder="Last Name" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address-input">Address:</label>
-                        <input type="text" name="address" id="address-input" class="form-control" placeholder="Address" required>
+                        <label for="shipping-address-input">Address:</label>
+                        <input type="text" name="address" id="shipping-address-input" class="form-control" placeholder="Address" required>
                     </div>
                 </form>
             </div>
