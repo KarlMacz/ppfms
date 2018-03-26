@@ -104,4 +104,110 @@ $(document).ready(function() {
 
         return false;
     });
+
+    $('body').on('click', '.view-buyer-button', function() {
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/modal_view_buyer.php', 'POST', {
+            id: $(this).attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            
+            if(response.status === 'Ok') {
+                setModalContent('view-buyer-modal', 'View Buyer\'s Information', response.output.body);
+                openModal('view-buyer-modal');
+            } else {
+                setModalContent('status-modal', 'View Buyer\'s Information', response.message);
+                openModal('status-modal', 'static');
+
+                setTimeout(function() {
+                    closeModal('status-modal');
+                    loadBuyersTable((currentBuyersPaginationPage * tableBuyersLimit) - tableBuyersLimit, tableBuyersLimit);
+                }, 2000);
+            }
+        });
+    });
+
+    $('body').on('click', '.delete-buyer-button', function() {
+        openModal('delete-buyer-modal', 'static');
+
+        $('#delete-buyer-modal').attr('data-id', $(this).attr('data-id'));
+    });
+
+    $('body').on('click', '#delete-buyer-modal .negative-button', function() {
+        $('#delete-buyer-modal').attr('data-id', '');
+
+        closeModal('delete-buyer-modal');
+    });
+
+    $('body').on('click', '#delete-buyer-modal .positive-button', function() {
+        closeModal('delete-buyer-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/delete_buyer.php', 'POST', {
+            id: $('#delete-buyer-modal').attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Delete Buyer\'s Information', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadBuyersTable((currentBuyersPaginationPage * tableBuyersLimit) - tableBuyersLimit, tableBuyersLimit);
+            }, 2000);
+        });
+    });
+
+    $('body').on('click', '.view-supplier-button', function() {
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/modal_view_supplier.php', 'POST', {
+            id: $(this).attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            
+            if(response.status === 'Ok') {
+                setModalContent('view-supplier-modal', 'View Supplier\'s Information', response.output.body);
+                openModal('view-supplier-modal');
+            } else {
+                setModalContent('status-modal', 'View Supplier\'s Information', response.message);
+                openModal('status-modal', 'static');
+
+                setTimeout(function() {
+                    closeModal('status-modal');
+                    loadSuppliersTable((currentSuppliersPaginationPage * tableSuppliersLimit) - tableSuppliersLimit, tableSuppliersLimit);
+                }, 2000);
+            }
+        });
+    });
+
+    $('body').on('click', '.delete-supplier-button', function() {
+        openModal('delete-supplier-modal', 'static');
+
+        $('#delete-supplier-modal').attr('data-id', $(this).attr('data-id'));
+    });
+
+    $('body').on('click', '#delete-supplier-modal .negative-button', function() {
+        $('#delete-supplier-modal').attr('data-id', '');
+
+        closeModal('delete-supplier-modal');
+    });
+
+    $('body').on('click', '#delete-supplier-modal .positive-button', function() {
+        closeModal('delete-supplier-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/delete_supplier.php', 'POST', {
+            id: $('#delete-supplier-modal').attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Delete Supplier', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadSuppliersTable((currentSuppliersPaginationPage * tableSuppliersLimit) - tableSuppliersLimit, tableSuppliersLimit);
+            }, 2000);
+        });
+    });
 });

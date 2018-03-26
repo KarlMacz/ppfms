@@ -100,14 +100,61 @@
     include_once('../layouts/factory_management_end.php');
     include_once('../partials/modals.php');
 ?>
-<div id="view-product-modal" class="modal fade">
+<div id="view-buyer-modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">View Product Information</h4>
+                <h4 class="modal-title">View Buyer's Information</h4>
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div id="delete-buyer-modal" class="modal fade" data-id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Buyer's Information</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this buyer's information?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="view-supplier-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">View Supplier's Information</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div id="delete-supplier-modal" class="modal fade" data-id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Supplier's Information</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this supplier's information?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

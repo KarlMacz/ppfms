@@ -7,7 +7,8 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = mysqli_query($connection, "SELECT * FROM `accounts`
             INNER JOIN `users`
-                ON `accounts`.`id`=`users`.`account_id`");
+                ON `accounts`.`id`=`users`.`account_id`
+            WHERE `accounts`.`type`='Client'");
         $count = mysqli_num_rows($query);
 
         if($count > 0) {
@@ -18,6 +19,7 @@
             $query = mysqli_query($connection, "SELECT * FROM `accounts`
                 INNER JOIN `users`
                     ON `accounts`.`id`=`users`.`account_id`
+                WHERE `accounts`.`type`='Client'
                 LIMIT $start, $limit");
 
             while($row = mysqli_fetch_assoc($query)) {
@@ -29,8 +31,8 @@
 
                 $buyers[] = [
                     'full_name' => $fullName,
-                    'actions' => '<button type="button" class="view-button btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="View Buyer\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-bars fa-fw"></span></button>
-                        <button type="button" class="delete-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Buyer\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-trash fa-fw"></span></button>'
+                    'actions' => '<button type="button" class="view-buyer-button btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="View Buyer\'s Information" data-id="' . $row['account_id'] . '"><span class="fas fa-bars fa-fw"></span></button>
+                        <button type="button" class="delete-buyer-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Buyer\'s Information" data-id="' . $row['account_id'] . '"><span class="fas fa-trash fa-fw"></span></button>'
                 ];
             }
 

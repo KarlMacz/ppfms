@@ -18,8 +18,8 @@
             while($row = mysqli_fetch_assoc($query)) {
                 $suppliers[] = [
                     'name' => $row['name'],
-                    'actions' => '<button type="button" class="view-button btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="View Supplier\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-bars fa-fw"></span></button>
-                        <button type="button" class="delete-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Supplier\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-trash fa-fw"></span></button>'
+                    'actions' => '<button type="button" class="view-supplier-button btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="View Supplier\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-bars fa-fw"></span></button>
+                        <button type="button" class="delete-supplier-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Supplier\'s Information" data-id="' . $row['id'] . '"><span class="fas fa-trash fa-fw"></span></button>'
                 ];
             }
 
