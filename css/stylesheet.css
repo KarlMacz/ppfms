@@ -3,6 +3,10 @@
     font-weight: bold;
 }
 
+.input-group-addon.equalizer {
+    min-width: 20%;
+}
+
 .page-header {
     padding-left: 10px;
     padding-right: 10px;
@@ -128,8 +132,8 @@ hr {
     border-bottom: 1px solid #e7e7e7;
     color: #777;
     font-weight: bold;
-    padding: 0 10px 5px 10px;
-    margin-top: 10px;
+    padding: 0 15px 5px 15px;
+    margin-top: 15px;
 }
 
 .container-plasma {

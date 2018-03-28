@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand"><span class="fas fa-bars fa-fw"></span> Master Listing</div>
+            <div class="navbar-brand"><span class="fas fa-users fa-fw"></span> Master Listing</div>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

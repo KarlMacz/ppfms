@@ -120,6 +120,7 @@ $(document).ready(function() {
         });
 
         if(empty.length === 0) {
+            closeModal('checkout-modal');
             openModal('loader-modal', 'static');
 
             ajaxRequest('../backend/ajax/checkout.php', 'POST', $('#checkout-form').serialize(), function(response) {

@@ -43,7 +43,6 @@
                 $supplies = $_POST['supplies'];
 
                 $filetype = null;
-                $logoFilename = null;
 
                 if(empty($logo['name'])) {
                     $query = mysqli_query($connection, "INSERT INTO `suppliers` (`name`, `description`) VALUES ('$name', '$description')");

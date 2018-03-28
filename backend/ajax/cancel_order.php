@@ -9,7 +9,7 @@
 
         $query = mysqli_query($connection, "UPDATE `orders` SET `status`='Cancelled' WHERE `id`='$id'");
 
-        if(mysqli_num_rows($query) === 1) {
+        if(mysqli_affected_rows($connection) === 1) {
             echo json_encode([
                 'status' => 'Ok',
                 'type' => 'prompt',

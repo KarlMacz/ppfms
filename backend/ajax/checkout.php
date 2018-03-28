@@ -41,7 +41,7 @@
                     $cartID = $product['cart_id'];
                     $productID = $product['product_id'];
                     $quantity = $product['quantity'];
-                    $totalAmount = $product['totalAmount'];
+                    $totalAmount = $product['total_amount'];
 
                     mysqli_query($connection, "INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `total_amount`) VALUES ('$orderID', '$productID', '$quantity', '$totalAmount')");
                     
