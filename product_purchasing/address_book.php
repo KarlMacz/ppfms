@@ -4,7 +4,7 @@
     require_once('../backend/database.php');
     require_once('../backend/functions.php');
 
-    include_once('../layouts/authorized_header.php');
+    include_once('../layouts/authorized_product_purchasing_header.php');
     include_once('../layouts/product_purchasing_start.php');
 ?>
 <nav class="navbar navbar-default navbar-static-top no-margin">
