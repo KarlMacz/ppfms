@@ -3,6 +3,12 @@
         header('Location: ../login.php');
 
         exit();
+    } else {
+        if($_SESSION['type'] !== 'Administrator') {
+            header('Location: ../login.php');
+
+            exit();
+        }
     }
 ?>
 <!DOCTYPE html>

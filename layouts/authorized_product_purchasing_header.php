@@ -5,7 +5,7 @@
         exit();
     } else {
         if($_SESSION['type'] !== 'Client') {
-            header('Location: ../product_purchasing/index.php');
+            header('Location: ../login.php');
 
             exit();
         }
