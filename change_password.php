@@ -4,6 +4,8 @@
 
     if(!isset($_GET['ref'])) {
         header('Location: login.php');
+
+        exit();
     }
 
     include_once('layouts/header.php');
