@@ -1,6 +1,29 @@
 <?php
+    session_start();
+
     require_once('backend/database.php');
     require_once('backend/functions.php');
+
+    if(isset($_SESSION['user_id'])) {
+        switch($_SESSION['type']) {
+            case 'Administrator':
+                header('Location: factory_management/index.php');
+
+                exit();
+
+                break;
+            case 'Client':
+                header('Location: product_purchasing/index.php');
+
+                exit();
+                
+                break;
+            default:
+                session_destroy();
+
+                break;
+        }
+    }
 
     include_once('layouts/header.php');
 ?>
