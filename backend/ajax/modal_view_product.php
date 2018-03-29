@@ -19,9 +19,15 @@
                 <p>' . nl2br($row['description']) . '</p>
                 <h3 class="text-right">Php ' . number_format($row['item_price'], 2) . '</h3>';
             $outputFooter = '<div class="text-right">
-                    <button class="add-to-wishlist-button btn btn-danger" data-id="' . $row['id'] . '"><span class="fas fa-heart fa-fw"></span> Add to Wishlist</button>
-                    <button class="add-to-cart-button btn btn-primary" data-id="' . $row['id'] . '" data-name="' . $row['name'] . '" data-available="' . $row['quantity_available'] . '"><span class="fas fa-shopping-cart fa-fw"></span> Add to Cart</button>
-                </div>';
+                    <button type="button" class="add-to-wishlist-button btn btn-danger" data-id="' . $row['id'] . '"><span class="fas fa-heart fa-fw"></span> Add to Wishlist</button>';
+
+            if($row['quantity_available'] > 0) {
+                $outputFooter .= '<button type="button" class="add-to-cart-button btn btn-primary" data-id="' . $row['id'] . '" data-name="' . $row['name'] . '" data-available="' . $row['quantity_available'] . '"><span class="fas fa-shopping-cart fa-fw"></span> Add to Cart</button>';
+            } else {
+                $outputFooter .= '<button class="btn btn-default"><span class="fas fa-exclamation-circle fa-fw"></span> Out of Stock.</button>';
+            }
+
+            $outputFooter .= '</div>';
 
             echo json_encode([
                 'status' => 'Ok',
