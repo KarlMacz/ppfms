@@ -160,11 +160,71 @@
                 <form id="checkout-form">
                     <div class="form-group">
                         <label for="payment-method-input">Payment Method:</label>
-                        <select name="payment_method" id="payment-method-input" class="form-control" required autofocus>
+                        <select name="payment_method" id="payment-method-input" class="form-control" required>
                             <option value="" selected disabled>Select an option...</option>
                             <option value="Cash on Delivery">Cash on Delivery</option>
                             <option value="PayPal">PayPal</option>
                         </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="billing-address-input">Billing Address:</label>
+                                <select name="billing_address" id="billing-address-input" class="form-control" required>
+                                    <option value="" selected disabled>Select an option...</option>
+                                    <?php
+                                        $billingAddressesQuery = mysqli_query($connection, "SELECT * FROM `billing_addresses` WHERE `account_id`='$userID'");
+
+                                        if(mysqli_num_rows($billingAddressesQuery)) {
+                                            while($billingAddressesRow = mysqli_fetch_assoc($billingAddressesQuery)) {
+                                    ?>
+                                    <option value="<?php echo $billingAddressesRow['id']; ?>">
+                                        <?php
+                                            if($billingAddressesRow['middle_name'] != null) {
+                                                $billingAddressesName = $billingAddressesRow['first_name'] . ' ' . substr($billingAddressesRow['middle_name'], 0, 1) . '. ' . $billingAddressesRow['last_name'];
+                                            } else {
+                                                $billingAddressesName = $billingAddressesRow['first_name'] . ' ' . $billingAddressesRow['last_name'];
+                                            }
+
+                                            echo $billingAddressesName . ' - ' . $billingAddressesRow['billing_address'];
+                                        ?>
+                                    </option>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="shipping-address-input">Shipping Address:</label>
+                                <select name="shipping_address" id="shipping-address-input" class="form-control" required>
+                                    <option value="" selected disabled>Select an option...</option>
+                                    <?php
+                                        $shippingAddressesQuery = mysqli_query($connection, "SELECT * FROM `shipping_addresses` WHERE `account_id`='$userID'");
+
+                                        if(mysqli_num_rows($shippingAddressesQuery)) {
+                                            while($shippingAddressesRow = mysqli_fetch_assoc($shippingAddressesQuery)) {
+                                    ?>
+                                    <option value="<?php echo $shippingAddressesRow['id']; ?>">
+                                        <?php
+                                            if($shippingAddressesRow['middle_name'] != null) {
+                                                $shippingAddressesName = $shippingAddressesRow['first_name'] . ' ' . substr($shippingAddressesRow['middle_name'], 0, 1) . '. ' . $shippingAddressesRow['last_name'];
+                                            } else {
+                                                $shippingAddressesName = $shippingAddressesRow['first_name'] . ' ' . $shippingAddressesRow['last_name'];
+                                            }
+
+                                            echo $shippingAddressesName . ' - ' . $shippingAddressesRow['shipping_address'];
+                                        ?>
+                                    </option>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
