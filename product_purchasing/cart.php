@@ -150,6 +150,24 @@
         </div>
     </div>
 </div>
+<div id="remove-all-from-cart-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remove All from Cart</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove all products from the cart?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="checkout-modal" class="modal fade" data-id="">
     <div class="modal-dialog">
         <div class="modal-content">

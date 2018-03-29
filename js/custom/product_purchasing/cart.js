@@ -15,7 +15,9 @@ function loadTable() {
             $('#carts-table tfoot').html('<tr>\
                 <th class="text-right" colspan="2">Total Amount:</th>\
                 <th class="text-right">Php ' + response.data2 + '</th>\
-                <th></th>\
+                <th class="text-center">\
+                    <button type="button" class="remove-all-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Remove All from Cart"><span class="fas fa-trash fa-fw"></span></button>\
+                </th>\
             </tr>');
         } else {
             $('#carts-table tbody').append('<tr>\
@@ -97,6 +99,30 @@ $(document).ready(function() {
         }, function(response) {
             closeModal('loader-modal');
             setModalContent('status-modal', 'Remove from Cart', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadTable();
+            }, 2000);
+        });
+    });
+
+    $('body').on('click', '.remove-all-button', function() {
+        openModal('remove-all-from-cart-modal', 'static');
+    });
+
+    $('body').on('click', '#remove-all-from-cart-modal .negative-button', function() {
+        closeModal('remove-all-from-cart-modal');
+    });
+
+    $('body').on('click', '#remove-all-from-cart-modal .positive-button', function() {
+        closeModal('remove-all-from-cart-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/remove_all_from_cart.php', 'POST', {}, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Remove All from Cart', response.message);
             openModal('status-modal', 'static');
 
             setTimeout(function() {
