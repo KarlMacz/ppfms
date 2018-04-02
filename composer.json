@@ -2,6 +2,7 @@
     "require": {
         "paypal/rest-api-sdk-php": "^1.13",
         "dompdf/dompdf": "^0.8.2",
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "endroid/qr-code": "^2.5"
     }
 }
