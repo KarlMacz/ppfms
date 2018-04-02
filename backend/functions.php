@@ -260,6 +260,28 @@
         @mail($email, $subject, $content, implode("\r\n", $headers));
     }
 
+    function generate_product_code($connection) {
+        $str = '01234aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ56789';
+        $code = '';
+        $isOk = false;
+
+        do {
+            $code = '';
+
+            for($i = 0; $i < 10; $i++) {
+                $code .= $str[mt_rand(0, strlen($str) - 1)];
+            }
+
+            $query = mysqli_query($connection, "SELECT * FROM `products` WHERE `product_code`='$code'");
+
+            if(mysqli_num_rows($query) === 0) {
+                $isOk = true;
+            }
+        } while(!$isOk);
+
+        return $code;
+    }
+
     function generate_verification_code($connection) {
         $str = '01234aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ56789';
         $code = '';
