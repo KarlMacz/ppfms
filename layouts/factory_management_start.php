@@ -9,6 +9,10 @@
                 <li><a href="product_registration.php"><span class="fas fa-cubes fa-fw"></span> Product Registration</a></li>
                 <li><a href="system_settings.php"><span class="fas fa-cogs fa-fw"></span> System Settings</a></li>
             </ul>
+            <div class="nav-label">:: Inventory Management ::</div>
+            <ul class="nav">
+                <li><a href="inventory_listing.php"><span class="fas fa-list-alt fa-fw"></span> Inventory Listing</a></li>
+            </ul>
             <div class="nav-label">:: Client Management ::</div>
             <ul class="nav">
                 <li><a href="master_listing.php"><span class="fas fa-users fa-fw"></span> Master Listing</a></li>
