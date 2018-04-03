@@ -1,5 +1,5 @@
 <?php
-    define('MY_URL', 'http://localhost/pfms');
+    define('MY_URL', 'http://localhost/ppfms');
     define('COMPANY_NAME', 'Bhagi\'s International Trading Corporation');
 
     define('PAYPAL_CLIENT_ID', 'AelPbilr--EfyAll4rh_rrKRH1tpSSIVbIVGyuv8gaBESxJUhfril1tTlO7BhJ4hIXOa1cn4MbwEVB9a');

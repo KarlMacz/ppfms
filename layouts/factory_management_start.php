@@ -1,5 +1,5 @@
 <div id="wrapper">
-    <div class="sidebar" style="margin-top: 0;">
+    <div class="sidebar">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav">
                 <li class="content">
@@ -11,7 +11,11 @@
             </ul>
             <div class="nav-label">:: Inventory Management ::</div>
             <ul class="nav">
-                <li><a href="inventory_listing.php"><span class="fas fa-list-alt fa-fw"></span> Inventory Listing</a></li>
+                <li><a href="inventory_listing.php"><span class="fas fa-th-list fa-fw"></span> Inventory Listing</a></li>
+                <li><a href="supply_replacement.php"><span class="fas fa-plus fa-fw"></span> Supply Replacement</a></li>
+                <li><a href="rejection_statements.php"><span class="fas fa-undo fa-fw"></span> Rejection Statements</a></li>
+                <li><a href="material_return_registry.php"><span class="fas fa-undo fa-fw"></span> Material Return Registry</a></li>
+                <!-- <li><a href="excess_material_registry.php"><span class="fas fa-tasks fa-fw"></span> Excess Material Registry</a></li> -->
             </ul>
             <div class="nav-label">:: Client Management ::</div>
             <ul class="nav">

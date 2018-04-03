@@ -176,7 +176,19 @@ hr {
     resize: none;
 }
 
+.page-framing {
+    border: none;
+    height: 300px;
+    width: 100%;
+}
+
 #wrapper {
+    height: 100%;
+}
+
+#wrapper > .sidebar {
+    overflow-y: scroll;
+    margin-top: 0;
     height: 100%;
 }
 

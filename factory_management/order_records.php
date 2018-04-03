@@ -51,7 +51,7 @@
     <table id="orders-table" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Tracking Number</th>
+                <th width="15%">Tracking Number</th>
                 <th>Product(s)</th>
                 <th>Date & Time Ordered</th>
                 <th>Status</th>
