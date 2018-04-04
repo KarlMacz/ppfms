@@ -28,6 +28,10 @@
                 <li><a href="dispatch_tracking.php"><span class="fas fa-truck fa-fw"></span> Dispatch Tracking</a></li>
                 <li><a href="order_records.php"><span class="fas fa-list-alt fa-fw"></span> Order Records</a></li>
             </ul>
+            <div class="nav-label">:: Account Management ::</div>
+            <ul class="nav">
+                <li><a href="balance_sheet.php"><span class="fas fa-balance-scale fa-fw"></span> Balance Sheet</a></li>
+            </ul>
         </div>
     </div>
     <div id="page-wrapper">
