@@ -29,6 +29,7 @@
                             <th width="20%">Date Ordered</th>
                             <th width="15%">Boxes Arrived</th>
                             <th width="15%">Boxes Remaining</th>
+                            <th width="15%">Excess Boxes</th>
                             <th width="15%">Action(s)</th>
                         </tr>
                     </thead>
@@ -39,8 +40,9 @@
                     $outputBody .= '<tr>
                         <td>' . $row['name'] . '</td>
                         <td>' . date('F d, Y', strtotime($row['date_ordered'])) . '</td>
-                        <td>' . $row['boxes_arrived'] . '</td>
-                        <td>' . $row['boxes_in_stock'] . '</td>
+                        <td class="text-center">' . $row['boxes_arrived'] . '</td>
+                        <td class="text-center">' . $row['boxes_in_stock'] . '</td>
+                        <td class="text-center">' . $row['excess_boxes'] . '</td>
                         <td class="text-center">';
 
                     if($row['boxes_in_stock'] > 0) {
