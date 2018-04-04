@@ -69,7 +69,7 @@
     include_once('../partials/modals.php');
 ?>
 <div id="view-modal" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">View Stocks</h4>
@@ -142,6 +142,53 @@
                 <iframe src="" frameborder="0" id="qr-frame" class="page-framing"></iframe>
             </div>
             <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div id="issue-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Issue Registry</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <div class="text-left">
+                    <form id="issue-form">
+                        <div>
+                            <input type="hidden" name="id" value="">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="input-group-addon" for="issue-input">Issue:</label>
+                                <input type="text" name="issue" id="issue-input" class="form-control" placeholder="Issue" required autofocus>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="remove-issue-modal" class="modal fade" data-id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remove Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this issue?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

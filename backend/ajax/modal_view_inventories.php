@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>Supplier</th>
-                            <th width="20%">Date Ordered</th>
+                            <th width="15%">Date Ordered</th>
                             <th width="15%">Boxes Arrived</th>
                             <th width="15%">Boxes Remaining</th>
                             <th width="15%">Excess Boxes</th>
@@ -47,9 +47,11 @@
 
                     if($row['boxes_in_stock'] > 0) {
                         $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>
-                            <button type="button" class="excess-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Excess Material Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-level-down-alt fa-fw"></span></button>';
+                            <button type="button" class="excess-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Excess Material Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-level-down-alt fa-fw"></span></button>
+                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>';
                     } else {
-                        $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>';
+                        $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>
+                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>';
                     }
 
                     $outputBody .= '</td>

@@ -86,11 +86,11 @@ $(document).ready(function() {
         openModal('fetch-modal', 'static');
 
         $('#fetch-form input[name="id"]').val($(this).attr('data-id'));
-        $('#fetch-form input[name="quantity"]').val('1');
     });
 
     $('body').on('click', '#fetch-modal .negative-button', function() {
         $('#fetch-form input[name="id"]').val('');
+        $('#fetch-form input[name="quantity"]').val('1');
 
         closeModal('fetch-modal');
     });
@@ -123,11 +123,11 @@ $(document).ready(function() {
 
         $('#excess-form input[name="id"]').val($(this).attr('data-id'));
         $('#excess-form input[name="quantity"]').attr('max', $(this).attr('data-in-stock'));
-        $('#excess-form input[name="quantity"]').val('1');
     });
 
     $('body').on('click', '#excess-modal .negative-button', function() {
         $('#excess-form input[name="id"]').val('');
+        $('#excess-form input[name="quantity"]').val('1');
         $('#excess-form input[name="quantity"]').attr('max', '');
 
         closeModal('excess-modal');
@@ -144,7 +144,7 @@ $(document).ready(function() {
 
             ajaxRequest('../backend/ajax/excess_box.php', 'POST', $('#excess-form').serialize(), function(response) {
                 closeModal('loader-modal');
-                setModalContent('status-modal', 'Fetch Box', response.message);
+                setModalContent('status-modal', 'Excess Material Registry', response.message);
                 openModal('status-modal', 'static');
 
                 setTimeout(function() {
@@ -158,5 +158,87 @@ $(document).ready(function() {
     $('body').on('click', '.print-qr-button', function() {
         openModal('print-qr-modal');
         $('#qr-frame').attr('src', '../backend/pdf/generate_product_qr_code.php?id=' + $(this).attr('data-id'));
+    });
+
+    $('body').on('click', '.issue-button', function() {
+        closeModal('view-modal');
+        openModal('loader-modal', 'static');
+
+        var thisElement = $(this);
+
+        ajaxRequest('../backend/ajax/modal_issue_list.php', 'POST', {
+            id: $(this).attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            
+            if(response.status === 'Ok') {
+                setModalContent('issue-modal', 'Issue Registry', response.output.body);
+            } else {
+                setModalContent('issue-modal', 'Issue Registry', response.message);
+            }
+
+            openModal('issue-modal', 'static');
+
+            $('[data-toggle="tooltip"]').tooltip();
+            $('#issue-form input[name="id"]').val(thisElement.attr('data-id'));
+        });
+    });
+
+    $('body').on('click', '#issue-modal .negative-button', function() {
+        $('#issue-form input[name="id"]').val('');
+
+        closeModal('issue-modal');
+    });
+
+    $('body').on('click', '#issue-modal .positive-button', function() {
+        var empty = $('#issue-form').find('input[required]').filter(function() {
+            return this.value === '';
+        });
+
+        if(empty.length === 0) {
+            closeModal('issue-modal');
+            openModal('loader-modal', 'static');
+
+            ajaxRequest('../backend/ajax/issue_registry.php', 'POST', $('#issue-form').serialize(), function(response) {
+                closeModal('loader-modal');
+                setModalContent('status-modal', 'Issue Registry', response.message);
+                openModal('status-modal', 'static');
+
+                setTimeout(function() {
+                    closeModal('status-modal');
+                    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                }, 2000);
+            });
+        }
+    });
+
+    $('body').on('click', '.remove-issue-button', function() {
+        closeModal('issue-modal');
+        openModal('remove-issue-modal', 'static');
+
+        $('#remove-issue-modal').attr('data-id', $(this).attr('data-id'));
+    });
+
+    $('body').on('click', '#remove-issue-modal .negative-button', function() {
+        $('#remove-issue-modal').attr('data-id', '');
+
+        closeModal('remove-issue-modal');
+    });
+
+    $('body').on('click', '#remove-issue-modal .positive-button', function() {
+        closeModal('remove-issue-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/remove_issue.php', 'POST', {
+            id: $('#remove-issue-modal').attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Remove from Cart', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+            }, 2000);
+        });
     });
 });
