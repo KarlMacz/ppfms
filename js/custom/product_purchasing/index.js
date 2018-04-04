@@ -85,24 +85,6 @@ $(document).ready(function() {
         $('#add-to-cart-form input[name="quantity"]').attr('max', $(this).attr('data-available'));
     });
 
-    $('body').on('click', '.add-to-wishlist-button', function() {
-        closeModal('view-product-modal');
-        openModal('loader-modal', 'static');
-
-        ajaxRequest('../backend/ajax/add_to_wishlist.php', 'POST', {
-            id: $(this).attr('data-id')
-        }, function(response) {
-            closeModal('loader-modal');
-            setModalContent('status-modal', 'Add to Wishlist', response.message);
-            openModal('status-modal', 'static');
-
-            setTimeout(function() {
-                closeModal('status-modal');
-                loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
-            }, 2000);
-        });
-    });
-
     $('body').on('click', '#add-to-cart-modal .negative-button', function() {
         $('#add-to-cart-form #name-input').val('');
         $('#add-to-cart-form input[name="id"]').val('');
@@ -134,5 +116,23 @@ $(document).ready(function() {
 
             return false;
         }
+    });
+
+    $('body').on('click', '.add-to-wishlist-button', function() {
+        closeModal('view-product-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/add_to_wishlist.php', 'POST', {
+            id: $(this).attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Add to Wishlist', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+            }, 2000);
+        });
     });
 });
