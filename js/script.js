@@ -45,8 +45,31 @@ function ajaxRequest(url, method, data, successCallback, errorCallback) {
     });
 }
 
+function resizer() {
+    $('.card').each(function() {
+        var cardImageDiv = $(this).find('.card-image');
+
+        cardImageDiv.height((cardImageDiv.width() * 0.5625) + 'px');
+
+        var cardImage = $(this).find('.card-image img');
+
+        if(cardImage.height() <= cardImageDiv.height()) {
+            cardImage.css({
+                'height': '100%',
+                'width': 'auto'
+            });
+        }
+    });
+}
+
 $(document).ready(function() {
+    resizer();
+
     $('[data-toggle="tooltip"]').tooltip();
+
+    $(window).on('resize', function() {
+        resizer();
+    });
 
     $('.modal').on('shown.bs.modal', function() {
         $('[autofocus]').focus();
