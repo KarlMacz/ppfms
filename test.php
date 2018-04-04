@@ -13,9 +13,10 @@
         if(mysqli_affected_rows($connection)) {
             $accountID = mysqli_insert_id($connection);
             $query = mysqli_query($connection, "INSERT INTO `users` (`account_id`, `first_name`, `last_name`, `gender`, `birth_date`, `address`)
-                VALUES ('$accountID', '', '', 'Male', '1990-01-01', 'Kampri Bldg, 2254 Don Chino Roces Avenue, Makati City, Metro Manila')");
+                VALUES ('$accountID', 'Bhagi\'s International', 'Trading Corporation', 'Male', '1990-01-01', 'Kampri Bldg, 2254 Don Chino Roces Avenue, Makati City, Metro Manila')");
         }
 
+        /*
         $password = hash('sha256', 'jinjin');
         mysqli_query($connection, "INSERT INTO `accounts` (`username`, `password`, `email`, `is_verified`, `created_at`)
             VALUES ('karlmacz', '$password', 'karljarren0308@gmail.com', 1, '$today')");
@@ -25,6 +26,7 @@
             $query = mysqli_query($connection, "INSERT INTO `users` (`account_id`, `first_name`, `last_name`, `gender`, `birth_date`, `address`)
                 VALUES ('$accountID', 'Karl', ' Macadangdang', 'Male', '1996-01-01', 'Sampaloc, Manila')");
         }
+        */
     }
 
     function supplier_seeder() {
