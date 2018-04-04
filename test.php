@@ -74,6 +74,22 @@
                 }
 
                 break;
+            case 'backup':
+                if(isset($_GET['command'])) {
+                    switch($_GET['what']) {
+                        case 'database':
+                            $backupPath = 'ppfms_db.sql';
+                            $command = 'mysqldump --opt -h ' . DB_HOSTNAME . ' -u ' . DB_USERNAME . ' -p ' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupPath;
+
+                            system($command);
+
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                break;
             default:
                 break;
         }
