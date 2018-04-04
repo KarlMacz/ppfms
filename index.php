@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     require_once('backend/database.php');
     require_once('backend/functions.php');
 
@@ -20,7 +22,26 @@
                 <li><a href="#home-section">Home</a></li>
                 <li><a href="#about-us-section">About Us</a></li>
                 <li><a href="#contact-us-section">Contact Us</a></li>
+                <li><a href="products.php">Products</a></li>
+                <?php
+                    if(isset($_SESSION['user_id'])) {
+                ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['full_name']; ?> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="product_purchasing/index.php">Product Purchasing</a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../logout.php">Logout</a></li>
+                    </ul>
+                </li>
+                <?php
+                    } else {
+                ?>
                 <li><a href="login.php">Login</a></li>
+                <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>
