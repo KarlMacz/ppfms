@@ -107,12 +107,26 @@ hr {
     padding-top: 10px;
 }
 
+.card > .card-image {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+}
+
+.card > .card-image > img {
+    width: 100%;
+}
+
 .card > .card-footer {
     border-top: 1px solid #ccc;
     display: flex;
 }
 
 .card > .card-footer > .card-footer-item {
+    background-color: white;
+    border: none;
     color: #222;
     text-align: center;
     text-decoration: none;
@@ -124,7 +138,8 @@ hr {
     border-right: 1px solid #ccc;
 }
 
-.card > .card-footer > a.card-footer-item:hover {
+.card > .card-footer > a.card-footer-item:hover,
+.card > .card-footer > button.card-footer-item:hover {
     background-color: rgba(34, 34, 34, 0.1);
 }
 
