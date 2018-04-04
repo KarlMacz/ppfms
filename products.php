@@ -88,7 +88,7 @@
                     $countAll = mysqli_num_rows($queryAll);
                     $count = mysqli_num_rows($query);
                 ?>
-                <div class="text-right" style="margin-bottom: 10px;"><?php echo $countAll . ' result(s) found.' ?></div>
+                <div class="text-right" style="margin-bottom: 10px;"><?php echo 'Showing ' . ($start + 1) . '-' . ($start + $count) . ' of ' . $countAll . ' result(s).' ?></div>
                 <div class="well">
                     <?php
                         if($countAll > 0) {
@@ -149,8 +149,12 @@
                 <nav class="text-right">
                     <?php
                         if(isset($_SESSION['user_id'])) {
+                            $userID = $_SESSION['user_id'];
+
+                            $cartQuery = mysqli_query($connection, "SELECT * FROM `carts` WHERE `account_id`='$userID'");
+                            $cartCount = mysqli_num_rows($cartQuery);
                     ?>
-                    <a href="product_purchasing/cart.php" class="btn btn-default pull-left"><span class="fas fa-shopping-cart fa-fw"></span> View Cart</a>
+                    <a href="product_purchasing/cart.php" class="btn btn-default pull-left"><span class="fas fa-shopping-cart fa-fw"></span> View Cart<?php echo ($cartCount > 0 ? ' <span class="badge">' . $cartCount . '</span>' : '') ?></a>
                     <?php
                         }
                     ?>

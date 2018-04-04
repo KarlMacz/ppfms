@@ -26,7 +26,7 @@ $(document).ready(function() {
             closeModal('add-to-cart-modal');
             openModal('loader-modal', 'static');
 
-            ajaxRequest('../backend/ajax/add_to_cart.php', 'POST', $('#add-to-cart-form').serialize(), function(response) {
+            ajaxRequest('backend/ajax/add_to_cart.php', 'POST', $('#add-to-cart-form').serialize(), function(response) {
                 closeModal('loader-modal');
                 setModalContent('status-modal', 'Add to Cart', response.message);
                 openModal('status-modal', 'static');
@@ -43,7 +43,7 @@ $(document).ready(function() {
     $('body').on('click', '.add-to-wishlist-button', function() {
         openModal('loader-modal', 'static');
 
-        ajaxRequest('../backend/ajax/add_to_wishlist.php', 'POST', {
+        ajaxRequest('backend/ajax/add_to_wishlist.php', 'POST', {
             id: $(this).attr('data-id')
         }, function(response) {
             closeModal('loader-modal');
