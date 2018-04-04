@@ -47,7 +47,9 @@
                 $filetype = null;
 
                 if(empty($image['name'])) {
-                    $query = mysqli_query($connection, "INSERT INTO `products` (`name`, `description`, `type`, `category`, `item_price`, `created_at`) VALUES ('$name', '$description', '$type', '$category', '$price', '$today')");
+                    $productCode = generate_product_code($connection);
+
+                    $query = mysqli_query($connection, "INSERT INTO `products` (`product_code`, `name`, `description`, `type`, `category`, `item_price`, `created_at`) VALUES ('$productCode', '$name', '$description', '$type', '$category', '$price', '$today')");
 
                     if(mysqli_affected_rows($connection) === 1) {
         ?>
