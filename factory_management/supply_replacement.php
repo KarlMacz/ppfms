@@ -44,7 +44,7 @@
 
                 echo $orderDate;
 
-                $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_ordered`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$orderDate', '$today')");
+                $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$orderDate', '$today')");
 
                 if(mysqli_affected_rows($connection) === 1) {
         ?>

@@ -44,7 +44,7 @@
 
         if(mysqli_affected_rows($connection)) {
             $productID = mysqli_insert_id($connection);
-            mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_ordered`, `boxes_in_stock`, `date_ordered`, `created_at`)
+            mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`)
                 VALUES ('$productID', '1', '5', '4', '$today', '$today')");
         }
     }

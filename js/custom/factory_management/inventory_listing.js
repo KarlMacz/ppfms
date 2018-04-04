@@ -86,12 +86,11 @@ $(document).ready(function() {
         openModal('fetch-modal', 'static');
 
         $('#fetch-form input[name="id"]').val($(this).attr('data-id'));
-        $('#fetch-form input[name="quantity"]').attr('max', $(this).attr('data-in-stock'));
+        $('#fetch-form input[name="quantity"]').val('1');
     });
 
     $('body').on('click', '#fetch-modal .negative-button', function() {
         $('#fetch-form input[name="id"]').val('');
-        $('#fetch-form input[name="quantity"]').attr('max', '');
 
         closeModal('fetch-modal');
     });
@@ -106,6 +105,44 @@ $(document).ready(function() {
             openModal('loader-modal', 'static');
 
             ajaxRequest('../backend/ajax/fetch_box.php', 'POST', $('#fetch-form').serialize(), function(response) {
+                closeModal('loader-modal');
+                setModalContent('status-modal', 'Fetch Box', response.message);
+                openModal('status-modal', 'static');
+
+                setTimeout(function() {
+                    closeModal('status-modal');
+                    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                }, 2000);
+            });
+        }
+    });
+
+    $('body').on('click', '.excess-button', function() {
+        closeModal('view-modal');
+        openModal('excess-modal', 'static');
+
+        $('#excess-form input[name="id"]').val($(this).attr('data-id'));
+        $('#excess-form input[name="quantity"]').attr('max', $(this).attr('data-in-stock'));
+        $('#excess-form input[name="quantity"]').val('1');
+    });
+
+    $('body').on('click', '#excess-modal .negative-button', function() {
+        $('#excess-form input[name="id"]').val('');
+        $('#excess-form input[name="quantity"]').attr('max', '');
+
+        closeModal('excess-modal');
+    });
+
+    $('body').on('click', '#excess-modal .positive-button', function() {
+        var empty = $('#excess-form').find('input[required]').filter(function() {
+            return this.value === '';
+        });
+
+        if(empty.length === 0) {
+            closeModal('excess-modal');
+            openModal('loader-modal', 'static');
+
+            ajaxRequest('../backend/ajax/excess_box.php', 'POST', $('#excess-form').serialize(), function(response) {
                 closeModal('loader-modal');
                 setModalContent('status-modal', 'Fetch Box', response.message);
                 openModal('status-modal', 'static');

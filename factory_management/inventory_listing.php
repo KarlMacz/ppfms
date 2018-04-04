@@ -93,7 +93,33 @@
                     </div>
                     <div class="form-group no-margin">
                         <label for="quantity-input">Box Quantity:</label>
-                        <input type="number" step="any" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Quantity" required autofocus>
+                        <input type="number" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Box Quantity" required autofocus>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="excess-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Excess Material Registry</h4>
+            </div>
+            <div class="modal-body">
+                <form id="excess-form">
+                    <div>
+                        <input type="hidden" name="id" value="">
+                    </div>
+                    <div class="form-group no-margin">
+                        <label for="quantity-input">Excess Quantity:</label>
+                        <input type="number" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Excess Quantity" required autofocus>
                     </div>
                 </form>
             </div>

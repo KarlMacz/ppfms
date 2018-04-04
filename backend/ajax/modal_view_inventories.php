@@ -27,7 +27,7 @@
                         <tr>
                             <th>Supplier</th>
                             <th width="20%">Date Ordered</th>
-                            <th width="15%">Boxes Ordered</th>
+                            <th width="15%">Boxes Arrived</th>
                             <th width="15%">Boxes Remaining</th>
                             <th width="15%">Action(s)</th>
                         </tr>
@@ -39,12 +39,15 @@
                     $outputBody .= '<tr>
                         <td>' . $row['name'] . '</td>
                         <td>' . date('F d, Y', strtotime($row['date_ordered'])) . '</td>
-                        <td>' . $row['boxes_ordered'] . '</td>
+                        <td>' . $row['boxes_arrived'] . '</td>
                         <td>' . $row['boxes_in_stock'] . '</td>
                         <td class="text-center">';
 
                     if($row['boxes_in_stock'] > 0) {
-                        $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>';
+                        $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>
+                            <button type="button" class="excess-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Excess Material Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-level-down-alt fa-fw"></span></button>';
+                    } else {
+                        $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>';
                     }
 
                     $outputBody .= '</td>
