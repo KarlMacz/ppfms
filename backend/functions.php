@@ -347,6 +347,27 @@
         return $code;
     }
 
+    function generate_batch_number($connection) {
+        $code = '';
+        $isOk = false;
+
+        do {
+            $code = '';
+
+            for($i = 0; $i < 10; $i++) {
+                $code .= mt_rand(0, 9);
+            }
+
+            $query = mysqli_query($connection, "SELECT * FROM `batches` WHERE `batch_number`='$code'");
+
+            if(mysqli_num_rows($query) === 0) {
+                $isOk = true;
+            }
+        } while(!$isOk);
+
+        return $code;
+    }
+
     function input_escape_string($connection, $input) {
         return mysqli_real_escape_string($connection, $input);
     }
