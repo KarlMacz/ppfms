@@ -6,6 +6,16 @@
 
     include_once('../layouts/authorized_header.php');
     include_once('../layouts/factory_management_start.php');
+
+    function checkSettings($connection, $name) {
+        $query = mysqli_query($connection, "SELECT * FROM `settings` WHERE `name`='$name'");
+
+        if(mysqli_num_rows($query) === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 ?>
 <nav class="navbar navbar-default navbar-static-top no-margin">
     <div class="container-fluid">
@@ -42,16 +52,32 @@
 
                 $ctr = 0;
 
-                mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeWithin' WHERE `name`='shipping_fee_within_metro_manila'");
+                if(checkSettings($connection, 'shipping_fee_within_metro_manila')) {
+                    mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeWithin' WHERE `name`='shipping_fee_within_metro_manila'");
 
-                if(mysqli_affected_rows($connection)) {
-                    $ctr++;
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
+                } else {
+                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_within_metro_manila', '$shippingFeeWithin')");
+
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
                 }
 
-                mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeOutside' WHERE `name`='shipping_fee_outside_metro_manila'");
+                if(checkSettings($connection, 'shipping_fee_outside_metro_manila')) {
+                    mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeOutside' WHERE `name`='shipping_fee_outside_metro_manila'");
 
-                if(mysqli_affected_rows($connection)) {
-                    $ctr++;
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
+                } else {
+                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_outside_metro_manila', '$shippingFeeOutside')");
+
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
                 }
 
                 if($ctr > 0) {
