@@ -78,10 +78,30 @@
                 if(isset($_GET['command'])) {
                     switch($_GET['what']) {
                         case 'database':
-                            $backupPath = 'ppfms_db.sql';
-                            $command = 'mysqldump --opt -h ' . DB_HOSTNAME . ' -u ' . DB_USERNAME . ' -p ' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupPath;
+                            $backupPath = 'db/' . date('Ymd_His') . '_ppfms_db.sql';
+                            
+                            if(DB_PASSWORD !== '') {
+                                $command = DB_DUMPER . ' --opt -h' . DB_HOSTNAME . ' -u' . DB_USERNAME . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupPath;
+                            } else {
+                                $command = DB_DUMPER . ' --opt -h' . DB_HOSTNAME . ' -u' . DB_USERNAME . ' ' . DB_NAME . ' > ' . $backupPath;
+                            }
 
-                            system($command);
+                            exec($command, $output = [], $commandStatus);
+
+                            switch($commandStatus) {
+                                case 0:
+                                    echo 'Database has been successfully exported.';
+
+                                    break;
+                                case 1:
+                                    echo 'There was a warning during the export of database. ' . json_encode($output);
+
+                                    break;
+                                case 2:
+                                    echo 'Error exporting database.';
+
+                                    break;
+                            }
 
                             break;
                         default:
