@@ -38,13 +38,15 @@
         <?php
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $product = input_escape_string($connection, $_POST['product']);
-                $supplier = input_escape_string($connection, $_POST['supplier']);
+                $supplier = isset($_POST['supplier']) && $_POST['supplier'] !== '' ? input_escape_string($connection, $_POST['supplier']) : null;
                 $quantity = input_escape_string($connection, $_POST['quantity']);
                 $orderDate = input_escape_string($connection, $_POST['order_date']);
 
-                echo $orderDate;
-
-                $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$orderDate', '$today')");
+                if($supplier != null) {
+                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$orderDate', '$today')");
+                } else {
+                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$quantity', '$quantity', '$orderDate', '$today')");
+                }
 
                 if(mysqli_affected_rows($connection) === 1) {
         ?>
@@ -79,7 +81,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="supplier-input">Supplier:</label>
-                        <select name="supplier" id="supplier-input" class="form-control" required disabled>
+                        <select name="supplier" id="supplier-input" class="form-control" disabled>
                             <option value="" selected disabled>Select an option...</option>
                         </select>
                     </div>
