@@ -15,7 +15,10 @@
                 <li><a href="supply_replacement.php"><span class="fas fa-plus fa-fw"></span> Supply Replacement</a></li>
                 <li><a href="rejection_statements.php"><span class="fas fa-undo fa-fw"></span> Rejection Statements</a></li>
                 <li><a href="material_return_registry.php"><span class="fas fa-undo fa-fw"></span> Material Return Registry</a></li>
-                <!-- <li><a href="excess_material_registry.php"><span class="fas fa-tasks fa-fw"></span> Excess Material Registry</a></li> -->
+            </ul>
+            <div class="nav-label">:: Production Management ::</div>
+            <ul class="nav">
+                <li><a href="production_process_tracking.php"><span class="fas fa-arrow-right fa-fw"></span> Production Process Tracking</a></li>
             </ul>
             <div class="nav-label">:: Client Management ::</div>
             <ul class="nav">
