@@ -71,7 +71,7 @@
     include_once('../layouts/factory_management_end.php');
     include_once('../partials/modals.php');
 ?>
-<div id="add-production-modal" class="modal fade" data-id="">
+<div id="add-production-modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -111,6 +111,33 @@
         </div>
     </div>
 </div>
+<div id="extra-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Extra Product Information</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <div class="text-left">
+                    <form id="extra-form">
+                        <div>
+                            <input type="hidden" name="id" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="information-input">Additional Information:</label>
+                            <input type="text" name="information" id="information-input" class="form-control" placeholder="Additional Information" required autofocus>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> Cancel</button>
+                    <button type="button" class="positive-button btn btn-primary"><span class="fas fa-check fa-fw"></span> Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="finished-modal" class="modal fade" data-id="">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -119,6 +146,24 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to mark this batch as finished?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="remove-extra-modal" class="modal fade" data-id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remove Extra Product Information</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this extra product information?</p>
             </div>
             <div class="modal-footer">
                 <div class="text-right">

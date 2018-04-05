@@ -27,9 +27,10 @@
 
             while($row = mysqli_fetch_assoc($query)) {
                 if($row['status'] === 'Processing') {
-                    $actions = '<button type="button" class="finished-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Mark Batch as Finished" data-id="' . $row['batch_id'] . '"><span class="fas fa-check fa-fw"></span></button>';
+                    $actions = '<button type="button" class="extra-button btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Extra Product Information" data-id="' . $row['batch_id'] . '"><span class="fas fa-plus fa-fw"></span></button>
+                        <button type="button" class="finished-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Mark Batch as Finished" data-id="' . $row['batch_id'] . '"><span class="fas fa-check fa-fw"></span></button>';
                 } else {
-                    $actions = '';
+                    $actions = '<button type="button" class="extra-button btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="Extra Product Information" data-id="' . $row['batch_id'] . '"><span class="fas fa-plus fa-fw"></span></button>';
                 }
 
                 $batches[] = [

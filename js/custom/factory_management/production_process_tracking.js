@@ -105,4 +105,80 @@ $(document).ready(function() {
             }, 2000);
         });
     });
+
+    $('body').on('click', '.extra-button', function() {
+        openModal('loader-modal', 'static');
+
+        var thisElement = $(this);
+
+        ajaxRequest('../backend/ajax/modal_batch_information_list.php', 'POST', {
+            id: $(this).attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            
+            if(response.status === 'Ok') {
+                setModalContent('extra-modal', 'Extra Product Information', response.output.body);
+            } else {
+                setModalContent('extra-modal', 'Extra Product Information', response.message);
+            }
+
+            openModal('extra-modal', 'static');
+
+            $('[data-toggle="tooltip"]').tooltip();
+            $('#extra-form input[name="id"]').val(thisElement.attr('data-id'));
+        });
+    });
+
+    $('body').on('click', '#extra-modal .negative-button', function() {
+        $('#extra-form input[name="id"]').val('');
+
+        closeModal('extra-modal');
+    });
+
+    $('body').on('click', '#extra-modal .positive-button', function() {
+        closeModal('extra-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/add_extra_batch.php', 'POST', $('#extra-form').serialize(), function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Extra Product Information', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadTable((1 * tableLimit) - tableLimit, tableLimit);
+            }, 2000);
+        });
+    });
+
+    $('body').on('click', '.remove-extra-button', function() {
+        closeModal('extra-modal');
+        openModal('remove-extra-modal', 'static');
+
+        $('#remove-extra-modal').attr('data-id', $(this).attr('data-id'));
+    });
+
+    $('body').on('click', '#remove-extra-modal .negative-button', function() {
+        $('#remove-extra-modal').attr('data-id', '');
+
+        closeModal('remove-extra-modal');
+    });
+
+    $('body').on('click', '#remove-extra-modal .positive-button', function() {
+        closeModal('remove-extra-modal');
+        openModal('loader-modal', 'static');
+
+        ajaxRequest('../backend/ajax/remove_batch_information.php', 'POST', {
+            id: $('#remove-extra-modal').attr('data-id')
+        }, function(response) {
+            closeModal('loader-modal');
+            setModalContent('status-modal', 'Remove Extra Product Information', response.message);
+            openModal('status-modal', 'static');
+
+            setTimeout(function() {
+                closeModal('status-modal');
+                loadTable((1 * tableLimit) - tableLimit, tableLimit);
+            }, 2000);
+        });
+    });
 });
