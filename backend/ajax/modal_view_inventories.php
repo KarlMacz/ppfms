@@ -17,7 +17,7 @@
                 <div style="margin-bottom: 10px;">' . $row['description'] . '</div>';
 
             $query = mysqli_query($connection, "SELECT *, `inventories`.`id` AS `inventory_id` FROM `inventories`
-                INNER JOIN `suppliers`
+                LEFT JOIN `suppliers`
                     ON `inventories`.`supplier_id`=`suppliers`.`id`
                 WHERE `inventories`.`product_id`='$id'");
 
@@ -59,7 +59,7 @@
                 }
             } else {
                 $outputBody .= '<tr>
-                        <td class="text-center" colspan="5">No stocks left.</td>
+                        <td class="text-center" colspan="6">No stocks left.</td>
                     </tr>';
             }
 

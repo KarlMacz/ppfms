@@ -17,7 +17,7 @@ function loadTable(start, limit) {
             }
         } else {
             $('#products-table tbody').append('<tr>\
-                    <td class="text-center" colspan="4">No results found.</td>\
+                    <td class="text-center" colspan="5">No results found.</td>\
                 </tr>');
         }
 
