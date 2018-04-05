@@ -108,7 +108,7 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.add-billing-address-button', function() {
-        openModal('add-billing-address-modal');
+        openModal('add-billing-address-modal', 'static');
     });
 
     $('body').on('click', '#add-billing-address-modal .negative-button', function() {
@@ -138,7 +138,7 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.add-shipping-address-button', function() {
-        openModal('add-shipping-address-modal');
+        openModal('add-shipping-address-modal', 'static');
     });
 
     $('body').on('click', '#add-shipping-address-modal .negative-button', function() {
