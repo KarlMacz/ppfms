@@ -197,6 +197,10 @@ hr {
     width: 100%;
 }
 
+.page-framing.full-height {
+    height: 100%;
+}
+
 #wrapper {
     height: 100%;
 }

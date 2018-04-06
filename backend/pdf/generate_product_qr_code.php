@@ -46,21 +46,36 @@
 
         .header {
             border-bottom: 2px solid #ccc;
+            display: inline-block;
             font-size: 0.75em;
+            margin-bottom: 25px;
+            width: 100%;
         }
 
         .header .logo {
-            height: 50px;
-        }
-
-        .content {
+            display: inline-block;
+            vertical-align: middle;
             padding: 10px;
+            height: 55px;
         }
 
-        .content > .content-header {
-            font-size: 1.5em;
-            text-align: center;
-            margin-bottom: 10px;
+        .header .logo > img {
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        .header .texts {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .header .texts > .title {
+            font-size: 2.5em;
+        }
+
+        .header .texts > .subtitle {
+            font-size: 1.25em;
         }
 
         .footer {

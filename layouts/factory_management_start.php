@@ -7,6 +7,7 @@
                 </li>
                 <li><a href="index.php"><span class="fas fa-tachometer-alt fa-fw"></span> Dashboard</a></li>
                 <li><a href="product_registration.php"><span class="fas fa-cubes fa-fw"></span> Product Registration</a></li>
+                <li><a href="report.php"><span class="fas fa-flag fa-fw"></span> Report</a></li>
                 <li><a href="system_settings.php"><span class="fas fa-cogs fa-fw"></span> System Settings</a></li>
             </ul>
             <div class="nav-label">:: Inventory Management ::</div>
