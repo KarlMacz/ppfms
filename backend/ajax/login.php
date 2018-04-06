@@ -17,7 +17,8 @@
         $row = mysqli_fetch_assoc($query);
 
         if($row['is_verified']) {
-            $_SESSION['user_id'] = $row['account_id'];
+            $accountID = $row['account_id'];
+            $_SESSION['user_id'] = $accountID;
             $_SESSION['username'] = $row['username'];
             $_SESSION['type'] = $row['type'];
             
@@ -32,6 +33,8 @@
             } else {
                 $url = 'factory_management/index.php';
             }
+
+            mysqli_query($connection, "INSERT INTO `logs` (`acccount_id`, `message`, `created_at`) VALUES ('$accountID', 'has logged in.', '$today')");
 
             echo json_encode([
                 'status' => 'Ok',
