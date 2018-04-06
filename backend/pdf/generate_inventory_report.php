@@ -120,8 +120,8 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Supplied By</th>
-                        <th>Quantity (Box)</th>
-                        <th>Excess Quantity (Box)</th>
+                        <th width="20%">Quantity (Box)</th>
+                        <th width="20%">Excess Quantity (Box)</th>
                     </tr>
                 </thead>
                 <tbody>
