@@ -10,6 +10,8 @@ $(document).ready(function() {
             openModal('loader-modal', 'static');
 
             $('#report-frame').attr('src', thisValue);
+        } else {
+            $('#report-frame').attr('src', '../partials/report_placeholder.php');
         }
     });
 });
