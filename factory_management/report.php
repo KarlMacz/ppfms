@@ -42,6 +42,7 @@
                     <option value="" selected disabled>Select an option...</option>
                     <option value="../backend/pdf/generate_audit_trail_report.php">Audit Trail</option>
                     <option value="../backend/pdf/generate_inventory_report.php">Inventory</option>
+                    <option value="../backend/pdf/generate_cancelled_transactions_report.php">Cancelled Transactions</option>
                 </select>
             </div>
         </div>
