@@ -45,6 +45,8 @@
                     <option value="../backend/pdf/generate_cancelled_transactions_report.php">Cancelled Transactions</option>
                     <option value="../backend/pdf/generate_removed_products_report.php">Removed Products</option>
                     <option value="../backend/pdf/generate_registered_clients_report.php">Registered Clients</option>
+                    <option value="../backend/pdf/generate_sales_report.php">Sales</option>
+                    <option value="../backend/pdf/generate_defective_returned_products_report.php">Defective / Returned Products</option>
                 </select>
             </div>
         </div>
