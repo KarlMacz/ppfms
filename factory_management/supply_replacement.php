@@ -41,11 +41,12 @@
                 $supplier = isset($_POST['supplier']) && $_POST['supplier'] !== '' ? input_escape_string($connection, $_POST['supplier']) : null;
                 $quantity = input_escape_string($connection, $_POST['quantity']);
                 $orderDate = input_escape_string($connection, $_POST['order_date']);
+                $price = input_escape_string($connection, $_POST['price']);
 
                 if($supplier != null) {
-                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$orderDate', '$today')");
+                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `supplier_id`, `boxes_arrived`, `boxes_in_stock`, `price`, `date_ordered`, `created_at`) VALUES ('$product', '$supplier', '$quantity', '$quantity', '$price', '$orderDate', '$today')");
                 } else {
-                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `boxes_arrived`, `boxes_in_stock`, `date_ordered`, `created_at`) VALUES ('$product', '$quantity', '$quantity', '$orderDate', '$today')");
+                    $query = mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `boxes_arrived`, `boxes_in_stock`, `price`, `date_ordered`, `created_at`) VALUES ('$product', '$quantity', '$quantity', '$price', '$orderDate', '$today')");
                 }
 
                 if(mysqli_affected_rows($connection) === 1) {
@@ -88,16 +89,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="quantity-input">Quantity Supplied:</label>
-                        <input type="text" name="quantity" id="quantity-input" class="form-control" placeholder="Quantity Supplied" required>
-                    </div>
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label for="order-date-input">Date Ordered:</label>
                         <input type="date" name="order_date" id="order-date-input" class="form-control" placeholder="Date Ordered" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="quantity-input">Quantity Supplied:</label>
+                        <input type="number" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Quantity Supplied" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="price-input">Price:</label>
+                        <input type="number" step="any" name="price" id="price-input" class="form-control" min="1" placeholder="Price" required>
                     </div>
                 </div>
             </div>
