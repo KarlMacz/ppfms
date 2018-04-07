@@ -188,7 +188,7 @@
     $dompdf->setOptions($options);
     $dompdf->loadHtml($html);
     $dompdf->render();
-    $dompdf->stream($today . '_audit_trail_report.pdf', [
+    $dompdf->stream($today . '_cancelled_transactions_report.pdf', [
         'Attachment' => false
     ]);
 
