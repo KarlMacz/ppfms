@@ -49,6 +49,7 @@
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $shippingFeeWithin = isset($_POST['shipping_fee_within']) && $_POST['shipping_fee_within'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_within']) : 1;
                 $shippingFeeOutside = isset($_POST['shipping_fee_outside']) && $_POST['shipping_fee_outside'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_outside']) : 1;
+                $criticalLevel = isset($_POST['critical_level']) && $_POST['critical_level'] !== '' ? input_escape_string($connection, $_POST['critical_level']) : 1;
 
                 $ctr = 0;
 
@@ -80,6 +81,20 @@
                     }
                 }
 
+                if(checkSettings($connection, 'critical_level')) {
+                    mysqli_query($connection, "UPDATE `settings` SET `value`='$criticalLevel' WHERE `name`='critical_level'");
+
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
+                } else {
+                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('critical_level', '$criticalLevel')");
+
+                    if(mysqli_affected_rows($connection)) {
+                        $ctr++;
+                    }
+                }
+
                 if($ctr > 0) {
         ?>
         <div class="alert alert-success">All changes have been saved.</div>
@@ -93,6 +108,7 @@
 
             $shippingFeeWithinMetroManila = null;
             $shippingFeeOutsideMetroManila = null;
+            $criticalLevel = null;
 
             $query = mysqli_query($connection, "SELECT * FROM `settings`");
             
@@ -105,6 +121,10 @@
                             break;
                         case 'shipping_fee_outside_metro_manila':
                             $shippingFeeOutsideMetroManila = $row['value'];
+
+                            break;
+                        case 'critical_level':
+                            $criticalLevel = $row['value'];
 
                             break;
                     }
@@ -126,6 +146,14 @@
                         <div style="width: 300px;">Shipping Fee (Outside Metro Manila)</div>
                     </label>
                     <input type="number" step="any" name="shipping_fee_outside" id="shipping-fee-outside-input" class="form-control" min="1" placeholder="Shipping Fee (Outside Metro Manila)" value="<?php echo ($shippingFeeOutsideMetroManila != null ? $shippingFeeOutsideMetroManila : 1); ?>" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <label for="critical-level-input" class="input-group-addon">
+                        <div style="width: 300px;">Inventory Critical Level</div>
+                    </label>
+                    <input type="number" step="any" name="critical_level" id="critical-level-input" class="form-control" min="1" placeholder="Inventory Critical Level" value="<?php echo ($criticalLevel != null ? $criticalLevel : 1); ?>" required>
                 </div>
             </div>
             <div class="form-group text-right">
