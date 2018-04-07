@@ -200,9 +200,12 @@
 
                 foreach($backups as $backup) {
             ?>
-            <a href="<?php echo $backup; ?>" download="<?php echo basename($backup); ?>" class="list-group-item" data-toggle="tooltip" data-alignment="top" title="Click to download file">
-                <h4><?php echo basename($backup); ?></h4>
-            </a>
+            <div class="list-group-item">
+                <h3 class="list-group-item-heading"><?php echo basename($backup); ?></h3>
+                <p class="list-group-item-text text-right">
+                    <a href="<?php echo $backup; ?>" download="<?php echo basename($backup); ?>" class="btn btn-primary btn-xs"><span class="fas fa-download fa-fw"></span> Download</a>
+                </p>
+            </div>
             <?php
                 }
             ?>
