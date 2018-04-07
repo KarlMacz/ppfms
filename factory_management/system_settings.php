@@ -47,62 +47,64 @@
         <h3 class="page-header">System Settings</h3>
         <?php
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $shippingFeeWithin = isset($_POST['shipping_fee_within']) && $_POST['shipping_fee_within'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_within']) : 1;
-                $shippingFeeOutside = isset($_POST['shipping_fee_outside']) && $_POST['shipping_fee_outside'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_outside']) : 1;
-                $criticalLevel = isset($_POST['critical_level']) && $_POST['critical_level'] !== '' ? input_escape_string($connection, $_POST['critical_level']) : 1;
+                if($_POST['what'] === 'system_settings') {
+                    $shippingFeeWithin = isset($_POST['shipping_fee_within']) && $_POST['shipping_fee_within'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_within']) : 1;
+                    $shippingFeeOutside = isset($_POST['shipping_fee_outside']) && $_POST['shipping_fee_outside'] !== '' ? input_escape_string($connection, $_POST['shipping_fee_outside']) : 1;
+                    $criticalLevel = isset($_POST['critical_level']) && $_POST['critical_level'] !== '' ? input_escape_string($connection, $_POST['critical_level']) : 1;
 
-                $ctr = 0;
+                    $ctr = 0;
 
-                if(checkSettings($connection, 'shipping_fee_within_metro_manila')) {
-                    mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeWithin' WHERE `name`='shipping_fee_within_metro_manila'");
+                    if(checkSettings($connection, 'shipping_fee_within_metro_manila')) {
+                        mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeWithin' WHERE `name`='shipping_fee_within_metro_manila'");
 
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
+                    } else {
+                        mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_within_metro_manila', '$shippingFeeWithin')");
+
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
                     }
-                } else {
-                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_within_metro_manila', '$shippingFeeWithin')");
 
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
+                    if(checkSettings($connection, 'shipping_fee_outside_metro_manila')) {
+                        mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeOutside' WHERE `name`='shipping_fee_outside_metro_manila'");
+
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
+                    } else {
+                        mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_outside_metro_manila', '$shippingFeeOutside')");
+
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
                     }
-                }
 
-                if(checkSettings($connection, 'shipping_fee_outside_metro_manila')) {
-                    mysqli_query($connection, "UPDATE `settings` SET `value`='$shippingFeeOutside' WHERE `name`='shipping_fee_outside_metro_manila'");
+                    if(checkSettings($connection, 'critical_level')) {
+                        mysqli_query($connection, "UPDATE `settings` SET `value`='$criticalLevel' WHERE `name`='critical_level'");
 
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
+                    } else {
+                        mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('critical_level', '$criticalLevel')");
+
+                        if(mysqli_affected_rows($connection)) {
+                            $ctr++;
+                        }
                     }
-                } else {
-                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('shipping_fee_outside_metro_manila', '$shippingFeeOutside')");
 
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
-                    }
-                }
-
-                if(checkSettings($connection, 'critical_level')) {
-                    mysqli_query($connection, "UPDATE `settings` SET `value`='$criticalLevel' WHERE `name`='critical_level'");
-
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
-                    }
-                } else {
-                    mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('critical_level', '$criticalLevel')");
-
-                    if(mysqli_affected_rows($connection)) {
-                        $ctr++;
-                    }
-                }
-
-                if($ctr > 0) {
+                    if($ctr > 0) {
         ?>
         <div class="alert alert-success">All changes have been saved.</div>
         <?php
-                } else {
+                    } else {
         ?>
         <div class="alert alert-danger">No changes have been made.</div>
         <?php
+                    }
                 }
             }
 
@@ -132,32 +134,93 @@
             }
         ?>
         <form action="" method="POST">
-            <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <label for="shipping-fee-within-input" class="input-group-addon">
-                        <div style="width: 300px;">Shipping Fee (Within Metro Manila)</div>
-                    </label>
-                    <input type="number" step="any" name="shipping_fee_within" id="shipping-fee-within-input" class="form-control" min="1" placeholder="Shipping Fee (Within Metro Manila)" value="<?php echo ($shippingFeeWithinMetroManila != null ? $shippingFeeWithinMetroManila : 1); ?>" required>
-                </div>
+            <div>
+                <input type="hidden" name="what" value="system_settings">
             </div>
             <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <label for="shipping-fee-outside-input" class="input-group-addon">
-                        <div style="width: 300px;">Shipping Fee (Outside Metro Manila)</div>
-                    </label>
-                    <input type="number" step="any" name="shipping_fee_outside" id="shipping-fee-outside-input" class="form-control" min="1" placeholder="Shipping Fee (Outside Metro Manila)" value="<?php echo ($shippingFeeOutsideMetroManila != null ? $shippingFeeOutsideMetroManila : 1); ?>" required>
-                </div>
+                <label for="shipping-fee-within-input">Shipping Fee (Within Metro Manila):</label>
+                <input type="number" step="any" name="shipping_fee_within" id="shipping-fee-within-input" class="form-control input-lg" min="1" placeholder="Shipping Fee (Within Metro Manila)" value="<?php echo ($shippingFeeWithinMetroManila != null ? $shippingFeeWithinMetroManila : 1); ?>" required>
             </div>
             <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <label for="critical-level-input" class="input-group-addon">
-                        <div style="width: 300px;">Inventory Critical Level</div>
-                    </label>
-                    <input type="number" step="any" name="critical_level" id="critical-level-input" class="form-control" min="1" placeholder="Inventory Critical Level" value="<?php echo ($criticalLevel != null ? $criticalLevel : 1); ?>" required>
-                </div>
+                <label for="shipping-fee-outside-input">Shipping Fee (Outside Metro Manila):</label>
+                <input type="number" step="any" name="shipping_fee_outside" id="shipping-fee-outside-input" class="form-control input-lg" min="1" placeholder="Shipping Fee (Outside Metro Manila)" value="<?php echo ($shippingFeeOutsideMetroManila != null ? $shippingFeeOutsideMetroManila : 1); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="critical-level-input">Inventory Critical Level:</label>
+                <input type="number" step="any" name="critical_level" id="critical-level-input" class="form-control input-lg" min="1" placeholder="Inventory Critical Level" value="<?php echo ($criticalLevel != null ? $criticalLevel : 1); ?>" required>
             </div>
             <div class="form-group text-right">
                 <button type="submit" class="btn btn-primary"><span class="fas fa-check fa-fw"></span> Save Changes</button>
+            </div>
+        </form>
+        <h3 class="page-header">Back-up Database</h3>
+        <?php
+            if($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if($_POST['what'] === 'backup_database') {
+                    if(isset($_POST['db_filename']) && $_POST['db_filename'] !== '') {
+                        $backupPath = '../db/' . date('Ymd_His') . '_' . input_escape_string($connection, $_POST['db_filename']) . '.sql';
+                    } else {
+                        $backupPath = '../db/' . date('Ymd_His') . '_database.sql';
+                    }
+                            
+                    if(DB_PASSWORD !== '') {
+                        $command = DB_DUMPER . ' --opt -h' . DB_HOSTNAME . ' -u' . DB_USERNAME . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupPath;
+                    } else {
+                        $command = DB_DUMPER . ' --opt -h' . DB_HOSTNAME . ' -u' . DB_USERNAME . ' ' . DB_NAME . ' > ' . $backupPath;
+                    }
+
+                    exec($command, $output = [], $commandStatus);
+
+                    switch($commandStatus) {
+                        case 0:
+        ?>
+        <div class="alert alert-success">Database has been successfully exported.</div>
+        <?php
+
+                            break;
+                        case 1:
+        ?>
+        <div class="alert alert-warning">There was a warning during the export of database.</div>
+        <?php
+
+                            break;
+                        case 2:
+        ?>
+        <div class="alert alert-danger">Error exporting database.</div>
+        <?php
+
+                            break;
+                    }
+                }
+            }
+        ?>
+        <div class="list-group">
+            <?php
+                $backups = glob('../db/*.sql');
+
+                foreach($backups as $backup) {
+            ?>
+            <a href="<?php echo $backup; ?>" download="<?php echo basename($backup); ?>" class="list-group-item" data-toggle="tooltip" data-alignment="top" title="Click to download file">
+                <h4><?php echo basename($backup); ?></h4>
+            </a>
+            <?php
+                }
+            ?>
+        </div>
+        <form action="" method="POST">
+            <div>
+                <input type="hidden" name="what" value="backup_database">
+            </div>
+            <div class="form-group">
+                <label for="db-filename-input">Filename:</label>
+                <div class="input-group input-group-lg">
+                    <input type="text" name="db_filename" id="db-filename-input" class="form-control" min="1" placeholder="Filename" value="<?php echo 'bitc_database'; ?>" required>
+                    <span class="input-group-addon">.sql</span>
+                </div>
+                <span class="help-block">Note: Current timestamp will be prepended to the filename.</span>
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary"><span class="fas fa-check fa-fw"></span> Create Back-up</button>
             </div>
         </form>
     </div>
