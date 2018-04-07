@@ -43,6 +43,8 @@
                     <option value="../backend/pdf/generate_audit_trail_report.php">Audit Trail</option>
                     <option value="../backend/pdf/generate_inventory_report.php">Inventory</option>
                     <option value="../backend/pdf/generate_cancelled_transactions_report.php">Cancelled Transactions</option>
+                    <option value="../backend/pdf/generate_removed_products_report.php">Removed Products</option>
+                    <option value="../backend/pdf/generate_registered_clients_report.php">Registered Clients</option>
                 </select>
             </div>
         </div>
