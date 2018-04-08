@@ -36,6 +36,7 @@
                 $batches[] = [
                     'number' => $row['batch_number'],
                     'product' => $row['name'],
+                    'quantity' => $row['quantity'] . ' boxes',
                     'datetime_added' => date('F d, Y h:iA', strtotime($row['batch_created_at'])),
                     'status' => $row['status'],
                     'actions' => $actions

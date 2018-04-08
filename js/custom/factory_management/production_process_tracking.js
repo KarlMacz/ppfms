@@ -10,6 +10,7 @@ function loadTable(start, limit) {
                 $('#batches-table tbody').append('<tr>\
                         <td class="text-center">' + response.data[ctr].number + '</td>\
                         <td>' + response.data[ctr].product + '</td>\
+                        <td>' + response.data[ctr].quantity + '</td>\
                         <td>' + response.data[ctr].datetime_added + '</td>\
                         <td class="text-center">' + response.data[ctr].status + '</td>\
                         <td class="text-center">' + response.data[ctr].actions + '</td>\

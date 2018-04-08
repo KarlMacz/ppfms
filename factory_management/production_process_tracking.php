@@ -56,6 +56,7 @@
             <tr>
                 <th width="15%">Batch Number</th>
                 <th>Name</th>
+                <th width="15%">Quantity</th>
                 <th width="20%">Date & Time Added</th>
                 <th width="10%">Status</th>
                 <th width="10%">Action(s)</th>
@@ -145,7 +146,7 @@
                 <h4 class="modal-title">Mark Batch as Finished</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to mark this batch as finished?</p>
+                <p>Are you sure you want to mark this batch as finished? Finished batch will automatically be added to the product's inventory.</p>
             </div>
             <div class="modal-footer">
                 <div class="text-right">
