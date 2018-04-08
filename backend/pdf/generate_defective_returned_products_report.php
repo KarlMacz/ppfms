@@ -127,9 +127,11 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="20%">Products</th>
-                        <th>Method</th>
-                        <th width="20%">Amount Due</th>
+                        <th>Products</th>
+                        <th>Supplied By</th>
+                        <th width="15%">Boxes Arrived</th>
+                        <th width="20%">Date Ordered</th>
+                        <th width="20%">Reason</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,46 +139,39 @@
                         $todayStamp = date('Y-m-d');
                         $totalAmountDue = 0;
 
-                        $query = mysqli_query($connection, "SELECT * FROM `orders`
-                            INNER JOIN `users`
-                                ON `orders`.`account_id`=`users`.`account_id`
-                            WHERE `orders`.`created_at` LIKE '$todayStamp%'");
+                        $query = mysqli_query($connection, "SELECT *,
+                                `products`.`name` AS `product_name`,
+                                `suppliers`.`name` AS `supplier_name`
+                            FROM `inventories`
+                            INNER JOIN `products`
+                                ON `inventories`.`product_id`=`products`.`id`
+                            LEFT JOIN `suppliers`
+                                ON `inventories`.`supplier_id`=`suppliers`.`id`
+                            WHERE `inventories`.`status`='Returned'
+                                AND `inventories`.`created_at` LIKE '$todayStamp%'");
 
                         if(mysqli_num_rows($query) > 0) {
                             while($row = mysqli_fetch_assoc($query)) {
                                 $totalAmountDue += $row['amount_due'];
                     ?>
                     <tr>
-                        <td class="text-center"><?php echo $row['tracking_number']; ?></td>
-                        <td>
-                            <?php
-                                if($row['middle_name'] != null) {
-                                    echo $row['first_name'] . ' ' . substr($row['middle_name'], 0, 1) . '. ' . $row['last_name'];
-                                } else {
-                                    echo $row['first_name'] . ' ' . $row['last_name'];
-                                }
-                            ?>
-                        </td>
-                        <td class="text-center"><?php echo $row['payment_method']; ?></td>
-                        <td class="text-right">Php <?php echo number_format($row['amount_due'], 2); ?></td>
+                        <td><?php echo $row['product_name']; ?></td>
+                        <td><?php echo $row['supplier_name']; ?></td>
+                        <td class="text-center"><?php echo $row['boxes_arrived']; ?></td>
+                        <td><?php echo date('F d, Y h:iA', strtotime($row['date_ordered'])); ?></td>
+                        <td>Php <?php echo number_format($row['return_reason'], 2); ?></td>
                     </tr>
                     <?php
                             }
                         } else {
                     ?>
                     <tr>
-                        <td class="text-center" colspan="4">No results found.</td>
+                        <td class="text-center" colspan="5">No results found.</td>
                     </tr>
                     <?php
                         }
                     ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th class="text-right" colspan="3">Total Amount:</th>
-                        <th class="text-right">Php <?php echo number_format($totalAmountDue, 2); ?></th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>
