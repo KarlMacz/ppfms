@@ -194,22 +194,30 @@
                 }
             }
         ?>
-        <div class="list-group">
-            <?php
-                $backups = glob('../db/*.sql');
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th width="10%">Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $backups = glob('../db/*.sql');
 
-                foreach($backups as $backup) {
-            ?>
-            <div class="list-group-item">
-                <h3 class="list-group-item-heading"><?php echo basename($backup); ?></h3>
-                <p class="list-group-item-text text-right">
-                    <a href="<?php echo $backup; ?>" download="<?php echo basename($backup); ?>" class="btn btn-primary btn-xs"><span class="fas fa-download fa-fw"></span> Download</a>
-                </p>
-            </div>
-            <?php
-                }
-            ?>
-        </div>
+                    foreach($backups as $backup) {
+                ?>
+                <tr>
+                    <td><?php echo basename($backup); ?></td>
+                    <td class="text-center">
+                        <a href="<?php echo $backup; ?>" download="<?php echo basename($backup); ?>" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Download File"><span class="fas fa-download fa-fw"></span></a>
+                    </td>
+                </tr>
+                <?php
+                    }
+                ?>
+            </tbody>
+        </table>
         <form action="" method="POST">
             <div>
                 <input type="hidden" name="what" value="backup_database">
