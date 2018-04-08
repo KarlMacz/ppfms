@@ -7,7 +7,10 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userID = $_SESSION['user_id'];
 
-        $query = mysqli_query($connection, "SELECT * FROM (
+        $query = mysqli_query($connection, "SELECT *,
+                `all_orders`.`created_at` AS `ao_created_at`,
+                `all_orders`.`timestamp_finished` AS `ao_timestamp_finished`
+            FROM (
                 SELECT *, `created_at` AS `log` FROM `batches`
                 UNION
                 SELECT *, `timestamp_finished` AS `log` FROM `batches`
@@ -23,7 +26,10 @@
             $batches = [];
             $order_logs = [];
 
-            $query = mysqli_query($connection, "SELECT * FROM (
+            $query = mysqli_query($connection, "SELECT *,
+                    `all_orders`.`created_at` AS `ao_created_at`,
+                    `all_orders`.`timestamp_finished` AS `ao_timestamp_finished`
+                FROM (
                     SELECT *, `created_at` AS `log` FROM `batches`
                     UNION
                     SELECT *, `timestamp_finished` AS `log` FROM `batches`
@@ -34,23 +40,23 @@
                 LIMIT $start, $limit");
 
             while($row = mysqli_fetch_assoc($query)) {
-                $in = '';
-                $out = '';
+                $inTimestamp = '';
+                $outTimestamp = '';
 
                 if(!in_array($row['batch_number'], $order_logs)) {
-                    $in = date('F d, Y h:iA', strtotime($row['created_at']));
+                    $inTimestamp = date('F d, Y h:iA', strtotime($row['ao_created_at']));
                 }
 
                 if(in_array($row['batch_number'], $order_logs)) {
-                    $out = date('F d, Y h:iA', strtotime($row['timestamp_finished']));
+                    $outTimestamp = date('F d, Y h:iA', strtotime($row['ao_timestamp_finished']));
                 }
 
                 $batches[] = [
                     'number' => $row['batch_number'],
                     'product' => $row['name'],
                     'quantity' => $row['quantity'] . ' boxes',
-                    'in' => $in,
-                    'out' => $out
+                    'in' => $inTimestamp,
+                    'out' => $outTimestamp
                 ];
 
                 $order_logs[] = $row['batch_number'];
