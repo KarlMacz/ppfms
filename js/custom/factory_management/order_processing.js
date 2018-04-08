@@ -71,7 +71,7 @@ $(document).ready(function() {
             id: $('#dispatch-order-modal').attr('data-id')
         }, function(response) {
             closeModal('loader-modal');
-            setModalContent('status-modal', 'Dispatch Order', response.message);
+            setModalContent('status-modal', 'Order Registry', response.message);
             openModal('status-modal', 'static');
 
             setTimeout(function() {

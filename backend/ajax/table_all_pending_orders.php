@@ -39,7 +39,7 @@
                     'products' => $orderItems,
                     'datetime_ordered' => date('F d, Y h:iA', strtotime($row['created_at'])),
                     'status' => $row['status'],
-                    'actions' => '<button type="button" class="dispatch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Dispatch Order" data-id="' . $orderID . '"><span class="fas fa-check fa-fw"></span></button>
+                    'actions' => '<button type="button" class="dispatch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Order Registry" data-id="' . $orderID . '"><span class="fas fa-check fa-fw"></span></button>
                         <button type="button" class="cancel-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cancel Order" data-id="' . $orderID . '"><span class="fas fa-times fa-fw"></span></button>'
                 ];
             }

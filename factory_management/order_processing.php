@@ -71,10 +71,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Dispatch Order</h4>
+                <h4 class="modal-title">Order Registry</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to dispatch this order? Dispatched orders will be moved to <a href="dispatch_tracking.php">Dispatch Tracking</a>.</p>
+                <p>Order Registry will mark this order as <strong>Dispatched</strong>. Dispatched orders will be moved to <a href="dispatch_tracking.php">Dispatch Tracking</a>.</p>
+                <p>Are you sure you want to continue?</p>
             </div>
             <div class="modal-footer">
                 <div class="text-right">
