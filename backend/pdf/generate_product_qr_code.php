@@ -117,7 +117,7 @@
             0, 0, 100, 100
         ]);
         $dompdf->render();
-        $dompdf->stream('product_' . $productCode . '.pdf', [
+        $dompdf->stream($productCode . '_product_qr.pdf', [
             'Attachment' => false
         ]);
 
