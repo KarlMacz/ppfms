@@ -26,7 +26,8 @@
 
                 $query2 = mysqli_query($connection, "SELECT * FROM `order_items`
                     INNER JOIN `products`
-                        ON `order_items`.`product_id`=`products`.`id`");
+                        ON `order_items`.`product_id`=`products`.`id`
+                    WHERE `order_items`.`order_id`='$orderID'");
 
                 if(mysqli_num_rows($query2) > 0) {
                     while($row2 = mysqli_fetch_assoc($query2)) {
