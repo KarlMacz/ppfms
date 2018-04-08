@@ -15,7 +15,7 @@
             $quantity = $batchRow['quantity'];
             $price = $batchRow['batch_price'];
 
-            $query = mysqli_query($connection, "UPDATE `batches` SET `status`='Finished' WHERE `id`='$id'");
+            $query = mysqli_query($connection, "UPDATE `batches` SET `status`='Finished', `timestamp_finished`='$today' WHERE `id`='$id'");
 
             if(mysqli_affected_rows($connection) === 1) {
                 mysqli_query($connection, "INSERT INTO `inventories` (`product_id`, `batch_id`, `boxes_arrived`, `boxes_in_stock`, `price`)
