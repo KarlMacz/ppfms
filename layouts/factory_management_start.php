@@ -20,6 +20,7 @@
             <div class="nav-label">:: Production Management ::</div>
             <ul class="nav">
                 <li><a href="production_process_tracking.php"><span class="fas fa-arrow-right fa-fw"></span> Production Process Tracking</a></li>
+                <li><a href="product_and_material_tracking.php"><span class="fas fa-thumbtack fa-fw"></span> Product and Material Tracking</a></li>
             </ul>
             <div class="nav-label">:: Client Management ::</div>
             <ul class="nav">
