@@ -16,11 +16,7 @@ $(document).ready(function() {
                     for(var ctr = 0; ctr < response.data.length; ctr++) {
                         $('#supplier-input').append('<option value="' + response.data[ctr].id + '">' + response.data[ctr].name + '</option>');
                     }
-                } else {
-                    $('#supplier-input').attr('disabled', true);
                 }
-            } else {
-                $('#supplier-input').attr('disabled', true);
             }
         });
     });

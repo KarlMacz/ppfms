@@ -82,7 +82,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="supplier-input">Supplier:</label>
-                        <select name="supplier" id="supplier-input" class="form-control" disabled>
+                        <select name="supplier" id="supplier-input" class="form-control" required>
                             <option value="" selected disabled>Select an option...</option>
                         </select>
                     </div>
