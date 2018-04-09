@@ -12,12 +12,16 @@
         if(mysqli_num_rows($query) === 1) {
             $row = mysqli_fetch_assoc($query);
 
-            $outputBody = '<div class="text-center" style="max-height: 200px;">
-                    ' . ($row['image'] != null ? '<img src="../uploads/products/' . $row['image'] . '" style="height: 100%;">' : '<div class="alert alert-info">No image preview.</div>') . '
+            $outputBody = '<div class="row">
+                <div class="col-sm-6">
+                    <div class="text-center">
+                        ' . ($row['image'] != null ? '<img src="../uploads/products/' . $row['image'] . '">' : '<div class="alert alert-info">No image preview.</div>') . '
+                    </div>
                 </div>
-                <h2>' . $row['name'] . '</h2>
-                <p>' . nl2br($row['description']) . '</p>
-                <h3 class="text-right">Php ' . number_format($row['item_price'], 2) . '</h3>';
+                <div class="col-sm-6">
+                    <h2 style="margin-top: 0;">' . $row['name'] . '</h2>
+                    <p>' . nl2br($row['description']) . '</p>
+                    <h3 class="text-right">Php ' . number_format($row['item_price'], 2) . '</h3>';
             $outputFooter = '<div class="text-right">
                     <button type="button" class="add-to-wishlist-button btn btn-danger" data-id="' . $row['id'] . '"><span class="fas fa-heart fa-fw"></span> Add to Wishlist</button>';
 
@@ -27,7 +31,9 @@
                 $outputFooter .= '<button class="btn btn-default"><span class="fas fa-exclamation-circle fa-fw"></span> Out of Stock.</button>';
             }
 
-            $outputFooter .= '</div>';
+            $outputFooter .= '</div>
+                    </div>
+                </div>';
 
             echo json_encode([
                 'status' => 'Ok',
