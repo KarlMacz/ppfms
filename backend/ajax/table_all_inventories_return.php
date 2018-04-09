@@ -10,9 +10,9 @@
         $query = mysqli_query($connection, "SELECT * FROM `inventories`
             INNER JOIN `products`
                 ON `inventories`.`product_id`=`products`.`id`
-            INNER JOIN `suppliers`
+            LEFT JOIN `suppliers`
                 ON `inventories`.`supplier_id`=`suppliers`.`id`
-            WHERE `inventories`.`status`='Returned'");
+            WHERE `inventories`.`return_boxes`>0");
         $count = mysqli_num_rows($query);
 
         if($count > 0) {
@@ -28,9 +28,9 @@
                 FROM `inventories`
                 INNER JOIN `products`
                     ON `inventories`.`product_id`=`products`.`id`
-                INNER JOIN `suppliers`
+                LEFT JOIN `suppliers`
                     ON `inventories`.`supplier_id`=`suppliers`.`id`
-                WHERE `inventories`.`status`='Returned'
+                WHERE `inventories`.`return_boxes`>0
                 LIMIT $start, $limit");
 
             while($row = mysqli_fetch_assoc($query)) {
