@@ -27,10 +27,11 @@
                         <tr>
                             <th>Supplier</th>
                             <th width="15%">Date Ordered</th>
-                            <th width="15%">Boxes Arrived</th>
-                            <th width="15%">Boxes Remaining</th>
-                            <th width="15%">Excess Boxes</th>
-                            <th width="15%">Action(s)</th>
+                            <th width="10%">Boxes Arrived</th>
+                            <th width="10%">Boxes Remaining</th>
+                            <th width="10%">Excess Boxes</th>
+                            <th width="10%">Return Boxes</th>
+                            <th width="20%">Action(s)</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -43,15 +44,18 @@
                         <td class="text-center">' . $row['boxes_arrived'] . '</td>
                         <td class="text-center">' . $row['boxes_in_stock'] . '</td>
                         <td class="text-center">' . $row['excess_boxes'] . '</td>
+                        <td class="text-center">' . $row['return_boxes'] . '</td>
                         <td class="text-center">';
 
                     if($row['boxes_in_stock'] > 0) {
                         $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>
                             <button type="button" class="excess-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Excess Material Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-level-down-alt fa-fw"></span></button>
-                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>';
+                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>
+                            <button type="button" class="return-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Material Return Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-undo fa-fw"></span></button>';
                     } else {
                         $outputBody .= '<button type="button" class="fetch-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Fetch Box" data-id="' . $row['inventory_id'] . '"><span class="fas fa-level-up-alt fa-fw"></span></button>
-                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>';
+                            <button type="button" class="issue-button btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Issue Registry" data-id="' . $row['inventory_id'] . '"><span class="fas fa-question fa-fw"></span></button>
+                            <button type="button" class="return-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Material Return Registry" data-id="' . $row['inventory_id'] . '" data-in-stock="' . $row['boxes_in_stock'] . '"><span class="fas fa-undo fa-fw"></span></button>';
                     }
 
                     $outputBody .= '</td>

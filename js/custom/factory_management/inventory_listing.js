@@ -155,6 +155,44 @@ $(document).ready(function() {
         }
     });
 
+    $('body').on('click', '.return-button', function() {
+        closeModal('view-modal');
+        openModal('return-modal', 'static');
+
+        $('#return-form input[name="id"]').val($(this).attr('data-id'));
+        $('#return-form input[name="quantity"]').attr('max', $(this).attr('data-in-stock'));
+    });
+
+    $('body').on('click', '#return-modal .negative-button', function() {
+        $('#return-form input[name="id"]').val('');
+        $('#return-form input[name="quantity"]').val('1');
+        $('#return-form input[name="quantity"]').attr('max', '');
+
+        closeModal('return-modal');
+    });
+
+    $('body').on('click', '#return-modal .positive-button', function() {
+        var empty = $('#return-form').find('input[required]').filter(function() {
+            return this.value === '';
+        });
+
+        if(empty.length === 0) {
+            closeModal('return-modal');
+            openModal('loader-modal', 'static');
+
+            ajaxRequest('../backend/ajax/return_box.php', 'POST', $('#return-form').serialize(), function(response) {
+                closeModal('loader-modal');
+                setModalContent('status-modal', 'Excess Material Registry', response.message);
+                openModal('status-modal', 'static');
+
+                setTimeout(function() {
+                    closeModal('status-modal');
+                    loadTable((currentPaginationPage * tableLimit) - tableLimit, tableLimit);
+                }, 2000);
+            });
+        }
+    });
+
     $('body').on('click', '.print-qr-button', function() {
         openModal('print-qr-modal');
         $('#qr-frame').attr('src', '../backend/pdf/generate_product_qr_code.php?id=' + $(this).attr('data-id'));

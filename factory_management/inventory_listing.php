@@ -132,6 +132,36 @@
         </div>
     </div>
 </div>
+<div id="return-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Material Return Registry</h4>
+            </div>
+            <div class="modal-body">
+                <form id="return-form">
+                    <div>
+                        <input type="hidden" name="id" value="">
+                    </div>
+                    <div class="form-group no-margin">
+                        <label for="quantity-input">Return Quantity:</label>
+                        <input type="number" name="quantity" id="quantity-input" class="form-control" min="1" placeholder="Excess Quantity" required autofocus>
+                    </div>
+                    <div class="form-group no-margin">
+                        <label for="reason-input">Reason:</label>
+                        <input type="text" name="reason" id="reason-input" class="form-control" placeholder="Reason" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <button type="button" class="negative-button btn btn-default"><span class="fas fa-times fa-fw"></span> No</button>
+                    <button type="button" class="positive-button btn btn-danger"><span class="fas fa-check fa-fw"></span> Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="print-qr-modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
