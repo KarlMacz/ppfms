@@ -371,4 +371,69 @@
     function input_escape_string($connection, $input) {
         return mysqli_real_escape_string($connection, $input);
     }
+
+    function validate_input($input, $validation) {
+        $validation = strtolower($validation);
+
+        if($validation === 'email') {
+            if(!filter_var($input, FILTER_VALIDATE_EMAIL)) {
+                return 'Input should be a valid email address.';
+            }
+        } else {
+            $regex = '';
+
+            switch($validation) {
+                case 'date':
+                    if(substr($input, 0, 4) % 4 == 0) {
+                        $regex = '/^([12]([0-9]{3}))-((02-(0[1-9]|1[0-9]|2[0-9]))|((04|06|09|11)-(0[1-9]|[12][0-9]|30))|((01|03|05|07|08|10|12)-(0[1-9]|[12][0-9]|3[01])))$/';
+                    } else {
+                        $regex = '/^([12]([0-9]{3}))-((02-(0[1-9]|1[0-9]|2[0-8]))|((04|06|09|11)-(0[1-9]|[12][0-9]|30))|((01|03|05|07|08|10|12)-(0[1-9]|[12][0-9]|3[01])))$/';
+                    }
+
+                    $errorMessage = 'Input should be a valid date';
+
+                    break;
+                case 'number':
+                    $regex = '/^([0-9])+$/';
+
+                    $errorMessage = 'Input should be a number.';
+
+                    break;
+                case 'decimal':
+                    $regex = '/^([0-9])+(\.?([0-9])+)$/';
+
+                    $errorMessage = 'Input should be a decimal number.';
+
+                    break;
+                case 'mobile':
+                    $regex = '/^(09|(\+)?639)[0-9]{9}$/';
+
+                    $errorMessage = 'Input should be a valid mobile number.';
+
+                    break;
+                case 'name':
+                    $regex = '/^([a-zA-Z\ \-])+$/';
+
+                    $errorMessage = 'Input should be a valid name.';
+
+                    break;
+                case 'alphanumeric':
+                    $regex = '/^([0-9a-zA-Z])+$/';
+
+                    $errorMessage = 'Input should be alphanumeric.';
+
+                    break;
+            }
+
+            if($regex !== '') {
+                if($input !== '' && !preg_match($regex, $input)) {
+                    return $errorMessage;
+                }
+            } else {
+                return 'Invalid validation type.';
+            }
+        }
+
+        return true;
+    }
 ?>
