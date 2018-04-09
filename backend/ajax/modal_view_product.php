@@ -12,8 +12,8 @@
         if(mysqli_num_rows($query) === 1) {
             $row = mysqli_fetch_assoc($query);
 
-            $outputBody = '<div class="text-center">
-                    ' . ($row['image'] != null ? '<img src="../uploads/products/' . $row['image'] . '">' : '<div class="alert alert-info">No image preview.</div>') . '
+            $outputBody = '<div class="text-center" style="max-height: 200px;">
+                    ' . ($row['image'] != null ? '<img src="../uploads/products/' . $row['image'] . '" style="height: 100%;">' : '<div class="alert alert-info">No image preview.</div>') . '
                 </div>
                 <h2>' . $row['name'] . '</h2>
                 <p>' . nl2br($row['description']) . '</p>
