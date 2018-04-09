@@ -1,19 +1,30 @@
 $(document).ready(function() {
     $('body').on('submit', '#register-form', function() {
-        openModal('loader-modal', 'static');
+        var thisElement = $(this);
 
-        ajaxRequest('backend/ajax/register.php', 'POST', $(this).serialize(), function(response) {
-            closeModal('loader-modal');
-            setModalContent('status-modal', 'Registration Status', response.message);
-            openModal('status-modal', 'static');
+        validateInputs(thisElement.serializeArray(), {
+            'username': 'alphanumeric',
+            'email': 'email',
+            'first_name': 'name',
+            'middle_name': 'name',
+            'last_name': 'name',
+            'birth_date': 'date'
+        }, '', function() {
+            openModal('loader-modal', 'static');
 
-            setTimeout(function() {
-                closeModal('status-modal');
+            ajaxRequest('backend/ajax/register.php', 'POST', thisElement.serialize(), function(response) {
+                closeModal('loader-modal');
+                setModalContent('status-modal', 'Registration Status', response.message);
+                openModal('status-modal', 'static');
 
-                if(response.status === 'Ok') {
-                    window.location = response.data.url;
-                }
-            }, 2000);
+                setTimeout(function() {
+                    closeModal('status-modal');
+
+                    if(response.status === 'Ok') {
+                        window.location = response.data.url;
+                    }
+                }, 2000);
+            });
         });
 
         return false;
