@@ -13,7 +13,7 @@
             $row = mysqli_fetch_assoc($query);
 
             $outputBody = '<div class="text-center">
-                    ' . ($row['image'] != null ? '<img src="../img/' . $row['image'] . '">' : '<div class="alert alert-info">No image preview.</div>') . '
+                    ' . ($row['image'] != null ? '<img src="../uploads/products/' . $row['image'] . '">' : '<div class="alert alert-info">No image preview.</div>') . '
                 </div>
                 <h2>' . $row['name'] . '</h2>
                 <p>' . nl2br($row['description']) . '</p>
