@@ -18,7 +18,7 @@ function loadTable(start, limit) {
             }
         } else {
             $('#batches-table tbody').append('<tr>\
-                    <td class="text-center" colspan="5">No results found.</td>\
+                    <td class="text-center" colspan="6">No results found.</td>\
                 </tr>');
         }
 
