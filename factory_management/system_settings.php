@@ -183,6 +183,7 @@
                         case 1:
         ?>
         <div class="alert alert-warning">There was a warning during the export of database.</div>
+        <div class="well"><?php echo json_encode($output); ?></div>
         <?php
 
                             break;
