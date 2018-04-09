@@ -39,17 +39,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="password-input">Password:</label>
-                                            <div class="control">
-                                                <input type="password" name="password" id="password-input" class="form-control" placeholder="Password" required>
-                                            </div>
+                                            <input type="password" name="password" id="password-input" class="form-control" placeholder="Password" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="confirm-password-input">Confirm Password:</label>
-                                            <div class="control">
-                                                <input type="password" name="confirm_password" id="confirm-password-input" class="form-control" placeholder="Confirm Password" required>
-                                            </div>
+                                            <input type="password" name="confirm_password" id="confirm-password-input" class="form-control" placeholder="Confirm Password" required>
                                         </div>
                                     </div>
                                 </div>
@@ -57,25 +53,19 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="first-name-input">First Name:</label>
-                                            <div class="control">
-                                                <input type="text" name="first_name" id="first-name-input" class="form-control" placeholder="First Name" required>
-                                            </div>
+                                            <input type="text" name="first_name" id="first-name-input" class="form-control" placeholder="First Name" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="middle-name-input">Middle Name:</label>
-                                            <div class="control">
-                                                <input type="text" name="middle_name" id="middle-name-input" class="form-control" placeholder="Middle Name">
-                                            </div>
+                                            <input type="text" name="middle_name" id="middle-name-input" class="form-control" placeholder="Middle Name">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="last-name-input">Last Name:</label>
-                                            <div class="control">
-                                                <input type="text" name="last_name" id="last-name-input" class="form-control" placeholder="Last Name" required>
-                                            </div>
+                                            <input type="text" name="last_name" id="last-name-input" class="form-control" placeholder="Last Name" required>
                                         </div>
                                     </div>
                                 </div>
