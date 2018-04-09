@@ -50,6 +50,8 @@
                 $query = mysqli_query($connection, "SELECT * FROM `products`");
 
                 if(mysqli_num_rows($query) > 0) {
+                    $ctr = 0;
+
                     while($row = mysqli_fetch_assoc($query)) {
                         $productID = $row['id'];
 
@@ -63,6 +65,7 @@
                         }
 
                         if($stocks <= $criticalLevel) {
+                            $ctr++;
             ?>
             <div class="list-group-item">
                 <h4 class="list-group-item-heading"><?php echo $row['name']; ?></h4>
@@ -71,9 +74,15 @@
             <?php
                         }
                     }
+
+                    if($ctr === 0) {
+            ?>
+            <div class="list-group-item">None at the moment.</div>
+            <?php
+                    }
                 } else {
             ?>
-            <div class="list-group-item text-center">None at the moment.</div>
+            <div class="list-group-item">No products found.</div>
             <?php
                 }
             ?>
