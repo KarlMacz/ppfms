@@ -1,4 +1,6 @@
 <?php
+    require_once('backend/database.php');
+
     session_start();
 
     $accountID = $_SESSION['user_id'];
