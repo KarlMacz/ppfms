@@ -17,7 +17,7 @@
             'shipping_fee_within_metro_manila',
             'shipping_fee_outside_metro_manila',
             'critical_level'
-        ]
+        ];
 
         $settingsQuery = mysqli_query($connection, "SELECT * FROM `settings`");
 
@@ -32,7 +32,7 @@
         }
 
         foreach($settings as $setting) {
-            mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('$setting', '1')")
+            mysqli_query($connection, "INSERT INTO `settings` (`name`, `value`) VALUES ('$setting', '1')");
         }
     }
 
