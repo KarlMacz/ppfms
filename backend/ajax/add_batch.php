@@ -9,7 +9,7 @@
         $quantity = input_escape_string($connection, $_POST['quantity']);
         $batchNumber = generate_batch_number($connection);
 
-        $query = mysqli_query($connection, "INSERT INTO `batches` (`product_id`, `supplier_id`, `batch_number`, `quantity`, `created_at`) VALUES ('$product', NULL, '$batchNumber', '$quantity', '$today')");
+        $query = mysqli_query($connection, "INSERT INTO `batches` (`product_id`, `batch_number`, `quantity`, `created_at`) VALUES ('$product', '$batchNumber', '$quantity', '$today')");
 
         if(mysqli_affected_rows($connection) === 1) {
             echo json_encode([
@@ -21,7 +21,7 @@
             echo json_encode([
                 'status' => 'Error',
                 'type' => 'prompt',
-                'message' => 'Failed to add batch. Error: ' . mysqli_error($connection)
+                'message' => 'Failed to add batch.'
             ]);
         }
     } else {
