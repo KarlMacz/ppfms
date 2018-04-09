@@ -62,7 +62,7 @@ function validateInputs(inputs, validations, path, doSomethingAfter) {
                 $('[name="' + response.data[i].field + '"]').closest('.form-group').removeClass('has-warning');
                 $('[name="' + response.data[i].field + '"]').closest('.form-group').removeClass('has-error');
 
-                $('[name="' + response.data[i].field + '"]').closest('.form-group').remove('.help-block');
+                $('[name="' + response.data[i].field + '"]').closest('.form-group').find('.help-block').remove();
                 
                 if(!response.data[i].validation_result) {
                     $('[name="' + response.data[i].field + '"]').closest('.form-group').addClass('has-error');
