@@ -45,6 +45,40 @@ function ajaxRequest(url, method, data, successCallback, errorCallback) {
     });
 }
 
+function validateInputs(inputs, validations, path, doSomethingAfter) {
+    if(path === undefined || path === null) {
+        path = '';
+    }
+
+    ajaxRequest(path + 'backend/ajax/validate_inputs.php', 'POST', {
+        inputs: inputs,
+        validations: validations
+    }, function(response) {
+        console.log(response.message);
+
+        if(response.status === 'Ok') {
+            for(var i = 0; i < response.data.length; i++) {
+                $('[name="' + response.data[i].field + '"]').closest('.form-group').removeClass('has-success');
+                $('[name="' + response.data[i].field + '"]').closest('.form-group').removeClass('has-warning');
+                $('[name="' + response.data[i].field + '"]').closest('.form-group').removeClass('has-error');
+
+                $('[name="' + response.data[i].field + '"]').closest('.form-group').remove('.help-block');
+                
+                if(!response.data[i].validation_result) {
+                    $('[name="' + response.data[i].field + '"]').closest('.form-group').addClass('has-error');
+                    $('[name="' + response.data[i].field + '"]').closest('.form-group').append('<span class="help-block">' + response.data[i].message + '</span>');
+                }
+            }
+
+            if(response.invalid_count === 0) {
+                if(doSomethingAfter !== undefined && doSomethingAfter !== null && typeof doSomethingAfter === 'function') {
+                    doSomethingAfter();
+                }
+            }
+        }
+    });
+}
+
 function resizer() {
     $('.card').each(function() {
         var cardImageDiv = $(this).find('.card-image');
