@@ -255,7 +255,7 @@
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-type: text/html; charset=iso-8859-1';
         $headers[] = ($name !== '' ? 'To: ' . $name . ' <' . $email . '>' : 'To: <' . $email . '>');
-        $headers[] = 'From: Bhagi\'s International Trading Corporation';
+        $headers[] = 'From: Bhagi\'s International Trading Corporation <noreply@bitccosmetics.com>';
 
         @mail($email, $subject, $content, implode("\r\n", $headers));
     }
