@@ -1,6 +1,13 @@
 $(document).ready(function() {
+    var today = new Date();
+    var yearToday = new String(today.getFullYear());
+    var monthToday = new String(today.getMonth() + 1);
+    var dateToday = new String(today.getDate());
+
     $('body').on('submit', '#register-form', function() {
         var thisElement = $(this);
+        var ageLimit = 18;
+        var beforeToday = (parseInt(yearToday) - ageLimit) + '-' + (monthToday.length < 2 ? '0' + monthToday : month) + '-' + (dateToday.length < 2 ? '0' + dateToday : dateToday);
 
         validateInputs(thisElement.serializeArray(), {
             'username': 'alphanumeric',
@@ -8,7 +15,7 @@ $(document).ready(function() {
             'first_name': 'name',
             'middle_name': 'name',
             'last_name': 'name',
-            'birth_date': 'date'
+            'birth_date': 'date_before|' + beforeToday
         }, '', function() {
             openModal('loader-modal', 'static');
 
