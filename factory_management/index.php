@@ -47,19 +47,29 @@
         <h3 class="page-header">Critical Level</h3>
         <div class="list-group">
             <?php
-                $query = mysqli_query($connection, "SELECT * FROM `inventories`
-                    INNER JOIN `products`
-                        ON `inventories`.`product_id`=`products`.`id`
-                    WHERE `boxes_in_stock`<='$criticalLevel'");
+                $query = mysqli_query($connection, "SELECT * FROM `products`");
 
                 if(mysqli_num_rows($query) > 0) {
                     while($row = mysqli_fetch_assoc($query)) {
+                        $productID = $row['id'];
+
+                        $query2 = mysqli_query($connection, "SELECT `boxes_in_stock` FROM `inventories`
+                            WHERE `product_id`='$productID'");
+
+                        $stocks = 0;
+
+                        while($row2 = mysqli_fetch_assoc($query2)) {
+                            $stocks += $row2['boxes_in_stock'];
+                        }
+
+                        if($stocks <= $criticalLevel) {
             ?>
             <div class="list-group-item">
                 <h4 class="list-group-item-heading"><?php echo $row['name']; ?></h4>
-                <div>Stocks Left: <strong><?php echo $row['boxes_in_stock'] . ($row['boxes_in_stock'] > 1) ? ' boxes' : 'box'; ?></strong></div>
+                <div><?php echo $row['boxes_in_stock'] . ($row['boxes_in_stock'] > 1) ? ' boxes' : 'box'; ?> left.</div>
             </div>
             <?php
+                        }
                     }
                 } else {
             ?>
