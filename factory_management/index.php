@@ -6,6 +6,15 @@
 
     include_once('../layouts/authorized_header.php');
     include_once('../layouts/factory_management_start.php');
+
+    $criticalLevel = 1;
+
+    $settingsQuery = mysqli_query($connection, "SELECT * FROM `settings` WHERE `name`='critical_level'");
+
+    if(mysqli_num_rows($settingsQuery) === 1) {
+        $settingsRow = mysqli_fetch_assoc($settingsQuery);
+        $criticalLevel = $settingsRow['value'];
+    }
 ?>
 <nav class="navbar navbar-default navbar-static-top no-margin">
     <div class="container-fluid">
@@ -33,6 +42,33 @@
     </div>
 </nav>
 <div id="page-wrapper-content">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4">
+        <h3 class="page-header">Critical Level</h3>
+        <div class="list-group">
+            <?php
+                $query = mysqli_query($connection, "SELECT * FROM `inventories`
+                    INNER JOIN `products`
+                        ON `inventories`.`product_id`=`products`.`id`
+                    WHERE `boxes_in_stock`<='$criticalLevel'");
+
+                if(mysqli_num_rows($query) > 0) {
+                    while($row = mysqli_fetch_assoc($query)) {
+            ?>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading"><?php echo $row['name']; ?></h4>
+                <div>Stocks Left: <strong><?php echo $row['boxes_in_stock'] . ($row['boxes_in_stock'] > 1) ? ' boxes' : 'box'; ?></strong></div>
+            </div>
+            <?php
+                    }
+                } else {
+            ?>
+            <div class="list-group-item text-center">None at the moment.</div>
+            <?php
+                }
+            ?>
+        </div>
+    </div>
 </div>
 <?php
     include_once('../layouts/factory_management_end.php');
