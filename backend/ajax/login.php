@@ -34,7 +34,7 @@
                 $url = 'factory_management/index.php';
             }
 
-            mysqli_query($connection, "INSERT INTO `logs` (`acccount_id`, `message`, `created_at`) VALUES ('$accountID', 'has logged in.', '$today')");
+            mysqli_query($connection, "INSERT INTO `logs` (`account_id`, `message`, `created_at`) VALUES ('$accountID', 'has logged in.', '$today')");
 
             echo json_encode([
                 'status' => 'Ok',
