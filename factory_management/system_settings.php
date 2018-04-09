@@ -169,7 +169,9 @@
                         $command = DB_DUMPER . ' --opt -h' . DB_HOSTNAME . ' -u' . DB_USERNAME . ' ' . DB_NAME . ' > ' . $backupPath;
                     }
 
-                    exec($command, $output = [], $commandStatus);
+                    $output = [];
+
+                    exec($command, $output, $commandStatus);
 
                     switch($commandStatus) {
                         case 0:
