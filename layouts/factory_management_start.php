@@ -36,6 +36,8 @@
             <div class="nav-label">:: Account Management ::</div>
             <ul class="nav">
                 <li><a href="balance_sheet.php"><span class="fas fa-balance-scale fa-fw"></span> Balance Sheet</a></li>
+                <li><a href="income_statement.php"><span class="fas fa-dollar-sign fa-fw"></span> Income Statement</a></li>
+                <li><a href="cash_flow_statement.php"><span class="fas fa-hand-holding-usd fa-fw"></span> Cash Flow Statement</a></li>
             </ul>
         </div>
     </div>
