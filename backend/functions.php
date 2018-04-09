@@ -375,7 +375,27 @@
     function validate_input($input, $validation) {
         $validation = strtolower($validation);
 
-        if($validation === 'email') {
+        if(explode('|', $validation)[0] === 'date_before') {
+            $beforeDate = explode('|', $validation)[1];
+
+            if(substr($input, 0, 4) % 4 == 0) {
+                $regex = '/^([12]([0-9]{3}))-((02-(0[1-9]|1[0-9]|2[0-9]))|((04|06|09|11)-(0[1-9]|[12][0-9]|30))|((01|03|05|07|08|10|12)-(0[1-9]|[12][0-9]|3[01])))$/';
+            } else {
+                $regex = '/^([12]([0-9]{3}))-((02-(0[1-9]|1[0-9]|2[0-8]))|((04|06|09|11)-(0[1-9]|[12][0-9]|30))|((01|03|05|07|08|10|12)-(0[1-9]|[12][0-9]|3[01])))$/';
+            }
+
+            if($regex !== '') {
+                if($input !== '' && !preg_match($regex, $input)) {
+                    return 'Input should be a valid date.';
+                } else {
+                    if(strtotime($input) >= strtotime($beforeDate)) {
+                        return 'Input should be a valid date before ' . date('F d, Y', strtotime($beforeDate)) . '.';
+                    }
+                }
+            } else {
+                return 'Invalid validation type.';
+            }
+        } else if($validation === 'email') {
             if(!filter_var($input, FILTER_VALIDATE_EMAIL)) {
                 return 'Input should be a valid email address.';
             }
@@ -390,7 +410,7 @@
                         $regex = '/^([12]([0-9]{3}))-((02-(0[1-9]|1[0-9]|2[0-8]))|((04|06|09|11)-(0[1-9]|[12][0-9]|30))|((01|03|05|07|08|10|12)-(0[1-9]|[12][0-9]|3[01])))$/';
                     }
 
-                    $errorMessage = 'Input should be a valid date';
+                    $errorMessage = 'Input should be a valid date.';
 
                     break;
                 case 'number':
