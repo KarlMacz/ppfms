@@ -10,6 +10,7 @@
         $trackingNumber = generate_tracking_number($connection);
         $billingAddressID = input_escape_string($connection, $_POST['billing_address']);
         $shippingAddressID = input_escape_string($connection, $_POST['shipping_address']);
+        $shippingFee = input_escape_string($connection, $_POST['shipping_fee']);
 
         $query = mysqli_query($connection, "SELECT *,
                 `carts`.`id` AS `cart_id`
@@ -33,7 +34,7 @@
                 $amountDue += $itemAmount;
             }
 
-            $order = mysqli_query($connection, "INSERT INTO `orders` (`account_id`, `billing_address_id`, `shipping_address_id`, `tracking_number`, `payment_method`, `amount_due`, `created_at`) VALUES ('$userID', '$billingAddressID', '$shippingAddressID', '$trackingNumber', '$paymentMethod', '$amountDue', '$today')");
+            $order = mysqli_query($connection, "INSERT INTO `orders` (`account_id`, `billing_address_id`, `shipping_address_id`, `tracking_number`, `payment_method`, `shipping_fee`, `amount_due`, `created_at`) VALUES ('$userID', '$billingAddressID', '$shippingAddressID', '$trackingNumber', '$paymentMethod', '$shippingFee', '$amountDue', '$today')");
 
             if(mysqli_affected_rows($connection) === 1) {
                 $orderID = mysqli_insert_id($connection);

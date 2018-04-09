@@ -61,42 +61,8 @@
                 <th width="10%">Action(s)</th>
             </tr>
         </thead>
-        <tbody>
-            <?php
-                $totalAmount = 0;
-
-                if(mysqli_num_rows($query) > 0) {
-                    while($row = mysqli_fetch_assoc($query)) {
-                        $itemTotal = ((double) $row['quantity']) * $row['item_price'];
-                        $totalAmount += $itemTotal;
-            ?>
-            <tr>
-                <td><?php echo $row['name']; ?></td>
-                <td><?php echo $row['quantity']; ?></td>
-                <td class="text-right">Php <?php echo number_format($itemTotal, 2); ?></td>
-                <td class="text-center">
-                    <button type="button" class="edit-button btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Quantity" data-id="<?php echo $row['cart_id']; ?>" data-name="<?php echo $row['name']; ?>" data-quantity="<?php echo $row['quantity']; ?>" data-available="<?php echo $row['quantity_available']; ?>"><span class="fas fa-edit fa-fw"></span></button>
-                    <button type="button" class="remove-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Remove from Cart" data-id="<?php echo $row['cart_id']; ?>"><span class="fas fa-trash fa-fw"></span></button>
-                </td>
-            </tr>
-            <?php
-                    }
-                } else {
-            ?>
-            <tr>
-                <td class="text-center" colspan="4">No results found.</td>
-            </tr>
-            <?php
-                }
-            ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="text-right" colspan="2">Total Amount:</th>
-                <th class="text-right">Php <?php echo number_format($totalAmount, 2); ?></th>
-                <th></th>
-            </tr>
-        </tfoot>
+        <tbody></tbody>
+        <tfoot></tfoot>
     </table>
 </div>
 <?php
@@ -177,6 +143,9 @@
             </div>
             <div class="modal-body">
                 <form id="checkout-form">
+                    <div>
+                        <input type="hidden" name="shipping_fee" value="">
+                    </div>
                     <div class="form-group">
                         <label for="payment-method-input">Payment Method:</label>
                         <select name="payment_method" id="payment-method-input" class="form-control" required>
@@ -226,7 +195,7 @@
                                         if(mysqli_num_rows($shippingAddressesQuery)) {
                                             while($shippingAddressesRow = mysqli_fetch_assoc($shippingAddressesQuery)) {
                                     ?>
-                                    <option value="<?php echo $shippingAddressesRow['id']; ?>">
+                                    <option value="<?php echo $shippingAddressesRow['id']; ?>" data-address="<?php echo $shippingAddressesRow['shipping_address']; ?>">
                                         <?php
                                             if($shippingAddressesRow['middle_name'] != null) {
                                                 $shippingAddressesName = $shippingAddressesRow['first_name'] . ' ' . substr($shippingAddressesRow['middle_name'], 0, 1) . '. ' . $shippingAddressesRow['last_name'];
@@ -246,6 +215,9 @@
                         </div>
                     </div>
                 </form>
+                <div id="shipping-fee-block" style="border-top: 2px dashed #777; padding-top: 25px; margin-top: 10px;">
+                    <div class="alert alert-info">Select a shipping address to know shipping fee.</div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="text-right">
