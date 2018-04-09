@@ -21,7 +21,7 @@
             echo json_encode([
                 'status' => 'Error',
                 'type' => 'prompt',
-                'message' => 'Failed to add batch.'
+                'message' => 'Failed to add batch. Error: ' . mysqli_error($connection);
             ]);
         }
     } else {
