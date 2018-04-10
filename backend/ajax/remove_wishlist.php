@@ -5,22 +5,21 @@
     require_once('../functions.php');
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $userID = $_SESSION['user_id'];
         $id = input_escape_string($connection, $_POST['id']);
 
-        $query = mysqli_query($connection, "INSERT INTO `wishlists` (`account_id`, `product_id`, `created_at`) VALUES ('$userID', '$id', '$today')");
+        $query = mysqli_query($connection, "DELETE FROM `wishlists` WHERE `id`='$id'");
 
         if(mysqli_affected_rows($connection) === 1) {
             echo json_encode([
                 'status' => 'Ok',
                 'type' => 'prompt',
-                'message' => 'Product has been added to wishlist.'
+                'message' => 'Product has been removed from wishlist.'
             ]);
         } else {
             echo json_encode([
                 'status' => 'Error',
                 'type' => 'prompt',
-                'message' => 'Failed to add product to wishlist.'
+                'message' => 'Failed to remove product from wishlist.'
             ]);
         }
     } else {
