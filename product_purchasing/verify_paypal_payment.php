@@ -23,7 +23,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-header-icon">
-                                <img src="img/logo.png">
+                                <img src="../img/logo.png">
                             </div>
                             <div class="card-header-title">Pay Through PayPal</div>
                         </div>
