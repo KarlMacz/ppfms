@@ -10,7 +10,7 @@
 
     include_once('layouts/header.php');
 ?>
-<section class="hero full-height">
+<section id="verify-account-section" class="hero full-height">
     <div class="hero-content">
         <div class="container">
             <div class="row">
