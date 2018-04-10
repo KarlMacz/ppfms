@@ -43,12 +43,11 @@
                 $type = input_escape_string($connection, $_POST['type']);
                 $category = input_escape_string($connection, $_POST['category']);
                 $price = input_escape_string($connection, $_POST['price']);
+                $productCode = generate_product_code($connection);
 
                 $filetype = null;
 
                 if(empty($image['name'])) {
-                    $productCode = generate_product_code($connection);
-
                     $query = mysqli_query($connection, "INSERT INTO `products` (`product_code`, `name`, `description`, `type`, `category`, `item_price`, `created_at`) VALUES ('$productCode', '$name', '$description', '$type', '$category', '$price', '$today')");
 
                     if(mysqli_affected_rows($connection) === 1) {
