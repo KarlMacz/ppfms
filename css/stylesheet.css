@@ -242,7 +242,8 @@ hr {
 #login-section,
 #registration-section,
 #forgot-password-section,
-#change-password-section {
+#change-password-section,
+#verify-account-section {
     /*background: linear-gradient(#158cba, #106282);*/
     background: linear-gradient(#3f3f3f, #222);
 }
