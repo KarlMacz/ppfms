@@ -69,7 +69,7 @@
             ?>
             <div class="list-group-item">
                 <h4 class="list-group-item-heading"><?php echo $row['name']; ?></h4>
-                <div><?php echo $stocks . ($stocks > 1 ? ' boxes' : 'box'); ?> left.</div>
+                <div><?php echo $stocks . ($stocks > 1 ? ' boxes' : ' box'); ?> left.</div>
             </div>
             <?php
                         }
