@@ -39,7 +39,9 @@
                                     $result = $ppDeal->verify_transaction($paymentID, $payerID);
 
                                     if($result) {
-                                        mysqli_query($connection, "UPDATE `orders` SET `amount_paid`=`amount_due`+`shipping_fee` WHERE `tracking_number`='$trackingNumber'");
+                                        $date = date('Y-m-d');
+                                        
+                                        mysqli_query($connection, "UPDATE `orders` SET `amount_paid`=`amount_due`+`shipping_fee`, `date_paid`='$date' WHERE `tracking_number`='$trackingNumber'");
                                         
                             ?>
                             <div class="alert alert-success">Transaction has been verified.</div>
