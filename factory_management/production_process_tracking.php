@@ -85,7 +85,9 @@
                         <select name="product" id="product-input" class="form-control" required autofocus>
                             <option value="" selected disabled>Select an option...</option>
                             <?php
-                                $productsQuery = mysqli_query($connection, "SELECT * FROM `products`
+                                $productsQuery = mysqli_query($connection, "SELECT *,
+                                        `products`.`id` AS `p_id`
+                                    FROM `products`
                                     LEFT JOIN `supplies`
                                         ON `products`.`id`=`supplies`.`product_id`
                                     WHERE `supplies`.`product_id` IS NULL");
@@ -93,7 +95,7 @@
                                 if(mysqli_num_rows($productsQuery) > 0) {
                                     while($productsRow = mysqli_fetch_assoc($productsQuery)) {
                             ?>
-                            <option value="<?php echo $productsRow['id']; ?>"><?php echo $productsRow['name']; ?></option>
+                            <option value="<?php echo $productsRow['p_id']; ?>"><?php echo $productsRow['name']; ?></option>
                             <?php
                                     }
                                 }
