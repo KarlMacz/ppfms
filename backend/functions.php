@@ -2,8 +2,8 @@
     define('MY_URL', 'http://localhost/ppfms');
     define('COMPANY_NAME', 'Bhagi\'s International Trading Corporation');
 
-    define('PAYPAL_CLIENT_ID', 'AelPbilr--EfyAll4rh_rrKRH1tpSSIVbIVGyuv8gaBESxJUhfril1tTlO7BhJ4hIXOa1cn4MbwEVB9a');
-    define('PAYPAL_SECRET', 'EIyXdWK9GFKBssNxet9Ou2hXnGZ26JXamaj0-W1SXOe0ZebCCmXMtMhXe_V0sg0PBT1PTrfcZDTvAyXl');\
+    define('PAYPAL_CLIENT_ID', 'AQio7ikbXriIo6k3-58XG4Up5QPUKOF3SWDL_zjvlvCt_SPKUJJrZMoX0cPxwPovxsoKvYxV0WIyxypP');
+    define('PAYPAL_SECRET', 'ENRbRAvl1yQTst2JmF5Ez2UJZC0GsB2v-F-WLVZhtDFuYyUp6tDTmxgdfr_FFwOhq2NtOo8_X8MvYMe5');
 
     define('RECAPTCHA_SITE_KEY', '6LdIJkoUAAAAAEAq-7Oq7G57vKKwXkEeAcajyQX9');
     define('RECAPTCHA_SECRET_KEY', '6LdIJkoUAAAAAF8-PxFFs3WbYJBID1PYQi50iucT');
