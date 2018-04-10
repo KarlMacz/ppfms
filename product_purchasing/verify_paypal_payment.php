@@ -10,7 +10,7 @@
         exit();
     }
 
-    include_once('../layouts/header.php');
+    include_once('../layouts/authorized_product_purchasing_header.php');
 ?>
 <section id="verify-account-section" class="hero full-height">
     <div class="hero-content">
