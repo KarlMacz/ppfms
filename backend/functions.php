@@ -37,7 +37,7 @@
             );
         }
 
-        function make_transaction($description, $paypalItems, $returnUrl, $cancelUrl) {
+        function make_transaction($description, $paypalItems, $shippingFee = 0.00, $returnUrl, $cancelUrl) {
             $payer = new PayPalPayer();
             $payer->setPaymentMethod('paypal');
 
@@ -60,7 +60,7 @@
             $itemList->setItems($items);
 
             $details = new PayPalDetails();
-            $details->setShipping(0.00)
+            $details->setShipping($shippingFee)
                 ->setSubtotal($subtotal);
 
             $amount = new PayPalAmount();
@@ -104,8 +104,10 @@
 
             try {
                 $result = $payment->execute($execute, $this->paypalApiContext);
+
+                return true;
             } catch(Exception $ex) {
-                die($ex);
+                return false;
             }
         }
     }
