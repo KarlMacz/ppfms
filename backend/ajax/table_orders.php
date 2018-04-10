@@ -33,10 +33,18 @@
                     }
                 }
 
+                $actions = '';
+
+                if(($row['amount_due'] + $row['shipping_fee']) > $row['amount_paid']) {
+                    $actions .= '<a href="pay_with_paypal.php?id=' . $orderID . '" class="paypal-button btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Pay Through PayPal"><span class="fab fa-paypal fa-fw"></span></a>';
+                }
+
+                if(($row['amount_due'] + $row['shipping_fee']) > $row['amount_paid'] && $row['status'] === 'Pending') {
+                    $actions .= ' ';
+                }
+
                 if($row['status'] === 'Pending') {
-                    $actions = '<button type="button" class="cancel-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cancel Order" data-id="' . $orderID . '"><span class="fas fa-times fa-fw"></span></button>';
-                } else {
-                    $actions = '';
+                    $actions .= '<button type="button" class="cancel-button btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cancel Order" data-id="' . $orderID . '"><span class="fas fa-times fa-fw"></span></button>';
                 }
 
                 $orders[] = [
