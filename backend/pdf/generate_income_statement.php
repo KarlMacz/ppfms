@@ -125,54 +125,48 @@
             </div>
         </div>
         <div class="content">
-            <div class="title">Income Statement</div>
-            <div class="liner text-right"><?php echo date('F d, Y h:iA'); ?></div>
+            <div class="title">Income Statement of <?php echo date('F Y', mktime(0, 0, 0, $month, 1, $year)); ?></div>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Action</th>
-                        <th width="30%">Date & Time of Action</th>
+                        <th>Tracking Number</th>
+                        <th width="25%">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        $todayStamp = date('Y-m-d');
+                        $totalAmount = 0;
+                        $stamp = $year . '-' . sprintf('%02d', $month);
 
-                        $query = mysqli_query($connection, "SELECT `logs`.*,
-                                `users`.`first_name` AS `fname`,
-                                `users`.`middle_name` AS `mname`,
-                                `users`.`last_name` AS `lname`
-                            FROM `logs`
-                            INNER JOIN `users`
-                                ON `logs`.`account_id`=`users`.`account_id`
-                            WHERE `logs`.`created_at` LIKE '$todayStamp%'");
+                        $query = mysqli_query($connection, "SELECT *
+                            FROM `orders`
+                            WHERE `created_at` LIKE '$stamp%'");
 
                         if(mysqli_num_rows($query) > 0) {
                             while($row = mysqli_fetch_assoc($query)) {
-                                if($row['mname'] != null) {
-                                    $fullName = $row['fname'] . ' ' . substr($row['mname'], 0, 1) . '. ' . $row['lname'];
-                                } else {
-                                    $fullName = $row['fname'] . ' ' . $row['lname'];
-                                }
-
+                                $totalAmount = $row['amount_due'] + $row['shipping_fee'];
                     ?>
                     <tr>
-                        <td><?php echo $fullName; ?></td>
-                        <td><?php echo $row['message']; ?></td>
-                        <td><?php echo date('F d, Y h:iA', strtotime($row['created_at'])); ?></td>
+                        <td><?php echo $row['tracking_number']; ?></td>
+                        <td class="text-right">Php <?php echo number_format(($row['amount_due'] + $row['shipping_fee']), 2); ?></td>
                     </tr>
                     <?php
                             }
                         } else {
                     ?>
                     <tr>
-                        <td class="text-center" colspan="3">No results found.</td>
+                        <td class="text-center" colspan="2">No results found.</td>
                     </tr>
                     <?php
                         }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-right">Total:</th>
+                        <th class="text-right">Php <?php echo number_format($totalAmount, 2); ?></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

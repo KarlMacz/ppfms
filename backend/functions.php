@@ -65,7 +65,7 @@
 
             $amount = new PayPalAmount();
             $amount->setCurrency('PHP')
-                ->setTotal($subtotal)
+                ->setTotal($subtotal + $shippingFee)
                 ->setDetails($details);
 
             $transaction = new PayPalTransaction();
