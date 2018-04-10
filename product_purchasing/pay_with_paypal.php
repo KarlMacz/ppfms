@@ -29,7 +29,9 @@
                     ];
                 }
 
-                $ppDeal->make_transaction('Order #' . $row['tracking_number'], $items, '/product_purchasing/verify_paypal_payment.php?status_code=1', '/product_purchasing/verify_paypal_payment.php?status_code=0');
+                $ppDealTransaction = $ppDeal->make_transaction('Order #' . $row['tracking_number'], $items, '/product_purchasing/verify_paypal_payment.php?status_code=1', '/product_purchasing/verify_paypal_payment.php?status_code=0');
+
+                header('Location: ' . $ppDealTransaction);
             } else {
                 echo json_encode([
                     'status' => 'Error',
