@@ -1,6 +1,8 @@
 <?php
-    require_once('../ backend/database.php');
-    require_once('../ backend/functions.php');
+    session_start();
+
+    require_once('../backend/database.php');
+    require_once('../backend/functions.php');
 
     if(!isset($_GET['status_code'])) {
         header('Location: recent_orders.php');

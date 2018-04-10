@@ -50,9 +50,9 @@
                 $item->setName($paypalItem['name'])
                     ->setCurrency('PHP')
                     ->setQuantity($paypalItem['quantity'])
-                    ->setPrice($paypalItem['price']);
+                    ->setPrice($paypalItem['price'] / $paypalItem['quantity']);
 
-                $subtotal += $paypalItem['price'] * $paypalItem['quantity'];
+                $subtotal += $paypalItem['price'];
                 $items[] = $item;
             }
 
