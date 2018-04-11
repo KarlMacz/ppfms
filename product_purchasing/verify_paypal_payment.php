@@ -81,45 +81,45 @@
 
                                     $ppVoiceOut->initialize_invoice();
 
-                                    $bAddress = $ppVoiceOut->parse_address($row['billing_address']);
+                                    $bAddress = $ppVoiceOut->parse_address($row['shipping_address']);
                                     $line = '';
                                     $locality = '';
                                     $administrativeAreaLevel = '';
-                                    $country = '';
+                                    $countryCode = '';
 
                                     foreach($bAddress as $ba) {
-                                        if($i = array_search('locality', $ba['types'])) {
+                                        if(array_search('locality', $ba['types']) !== false) {
                                             $locality .= $ba['long_name'];
-                                        } else if($i = array_search('administrative_area_level_1', $ba['types'])) {
+                                        } else if(array_search('administrative_area_level_1', $ba['types']) !== false) {
                                             $administrativeAreaLevel .= $ba['long_name'];
-                                        } else if($i = array_search('country', $ba['types'])) {
-                                            $country .= substr($ba['short_name'], 0, 2);
+                                        } else if(array_search('country', $ba['types']) !== false) {
+                                            $countryCode = substr($ba['short_name'], 0, 2);
                                         } else {
                                             $line .= $ba['long_name'];
                                         }
                                     }
 
-                                    $ppVoiceOut->set_billing_info($row['first_name'], $row['last_name'], $row['email'], $line, $locality, $administrativeAreaLevel, '', $country);
+                                    $ppVoiceOut->set_billing_info($row['first_name'], $row['last_name'], $row['email'], $line, $locality, $administrativeAreaLevel, '', $countryCode);
 
                                     $sAddress = $ppVoiceOut->parse_address($row['shipping_address']);
                                     $line = '';
                                     $locality = '';
                                     $administrativeAreaLevel = '';
-                                    $country = '';
+                                    $countryCode = '';
 
                                     foreach($sAddress as $sa) {
-                                        if($i = array_search('locality', $sa['types'])) {
+                                        if(array_search('locality', $sa['types']) !== false) {
                                             $locality .= $sa['long_name'];
-                                        } else if($i = array_search('administrative_area_level_1', $sa['types'])) {
+                                        } else if(array_search('administrative_area_level_1', $sa['types']) !== false) {
                                             $administrativeAreaLevel .= $sa['long_name'];
-                                        } else if($i = array_search('country', $sa['types'])) {
-                                            $country .= substr($sa['short_name'], 0, 2);
+                                        } else if(array_search('country', $sa['types']) !== false) {
+                                            $countryCode = substr($sa['short_name'], 0, 2);
                                         } else {
                                             $line .= $sa['long_name'];
                                         }
                                     }
 
-                                    $ppVoiceOut->set_shipping_info($row['first_name'], $row['last_name'], $row['email'], $line, $locality, $administrativeAreaLevel, '', $country);
+                                    $ppVoiceOut->set_shipping_info($row['first_name'], $row['last_name'], $row['email'], $line, $locality, $administrativeAreaLevel, '', $countryCode);
                                     $ppVoiceOut->set_item_list($items);
 
                                     if($result) {
