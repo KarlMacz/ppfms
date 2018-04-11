@@ -41,7 +41,9 @@
 
                                     $result = $ppDeal->verify_transaction($paymentID, $payerID);
 
-                                    $query = mysqli_query($connection, "SELECT * FROM `orders`
+                                    $query = mysqli_query($connection, "SELECT *
+                                            `orders`.`id` AS `ord_id`
+                                        FROM `orders`
                                         INNER JOIN `accounts`
                                             ON `orders`.`account_id`=`accounts`.`id`
                                         INNER JOIN `users`
@@ -52,6 +54,7 @@
                                             ON `orders`.`shipping_address_id`=`shipping_addresses`.`id`
                                         WHERE `orders`.`tracking_number`='$trackingNumber'");
                                     $row = mysqli_fetch_assoc($query);
+                                    $orderID = $row['ord_id'];
 
                                     if($row['middle_name'] != null) {
                                         $fullName = $row['first_name'] . ' ' . substr($row['middle_name'], 0, 1) . '. ' . $row['last_name'];
@@ -62,7 +65,7 @@
                                     $query2 = mysqli_query($connection, "SELECT * FROM `order_items`
                                         INNER JOIN `products`
                                             ON `order_items`.`product_id`=`products`.`id`
-                                        WHERE `order_items`.`order_id`='$id'");
+                                        WHERE `order_items`.`order_id`='$orderID'");
 
                                     $items = [];
 
@@ -78,7 +81,7 @@
 
                                     $ppVoiceOut->initialize_invoice();
 
-                                    $bAddress = $ppVoiceOut->parseAddress($row['billing_address']);
+                                    $bAddress = $ppVoiceOut->parse_address($row['billing_address']);
                                     $line = '';
                                     $locality = '';
                                     $administrativeAreaLevel = '';
@@ -98,7 +101,7 @@
 
                                     $ppVoiceOut->set_billing_info($row['first_name'], $row['last_name'], $row['email'], $line, $locality, $administrativeAreaLevel, '', $country);
 
-                                    $sAddress = $ppVoiceOut->parseAddress($row['shipping_address']);
+                                    $sAddress = $ppVoiceOut->parse_address($row['shipping_address']);
                                     $line = '';
                                     $locality = '';
                                     $administrativeAreaLevel = '';
