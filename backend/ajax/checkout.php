@@ -6,6 +6,8 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userID = $_SESSION['user_id'];
+        $firstName = $_SESSION['first_name'];
+        $fullName = $_SESSION['full_name'];
         $paymentMethod = input_escape_string($connection, $_POST['payment_method']);
         $trackingNumber = generate_tracking_number($connection);
         $billingAddressID = input_escape_string($connection, $_POST['billing_address']);
@@ -82,7 +84,7 @@
                                 </style>
                             </head>
                             <body>
-                                <h3>Dear ' . $_SESSION['first_name'] . ',</h3>
+                                <h3>Dear ' . $firstName . ',</h3>
                                 <div class="content">
                                     <p>Greetings from BITC Cosmetics!</p>
                                     <p>This is to confirm your product purchase with the following detail:</p>
@@ -109,7 +111,7 @@
                                     <p>Thank you for choosing BITC Cosmetics.</p>
                                 </div>
                             </body>
-                            </html>', $_SESSION['full_name']);
+                            </html>', $fullName);
                     }
 
                     echo json_encode([
