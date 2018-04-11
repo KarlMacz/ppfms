@@ -28,6 +28,7 @@
                 $products[] = [
                     'cart_id' => $row['cart_id'],
                     'product_id' => $row['product_id'],
+                    'product_name' => $row['name'],
                     'quantity' => $row['quantity'],
                     'total_amount' => $itemAmount
                 ];
@@ -39,6 +40,9 @@
             if(mysqli_affected_rows($connection) === 1) {
                 $orderID = mysqli_insert_id($connection);
                 $ctr = 0;
+                $boomyAmount = 0;
+
+                $tbodyContent = '';
 
                 foreach($products as $product) {
                     $cartID = $product['cart_id'];
@@ -46,15 +50,65 @@
                     $quantity = $product['quantity'];
                     $totalAmount = $product['total_amount'];
 
+                    $boomyAmount += $totalAmount;
+
                     mysqli_query($connection, "INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `total_amount`) VALUES ('$orderID', '$productID', '$quantity', '$totalAmount')");
                     
                     if(mysqli_affected_rows($connection) === 1) {
+                        $tbodyContent .= '<tr>
+                                <td>' . $row['product_name'] . '</td>
+                                <td>' . $totalAmount . '</td>
+                            </tr>';
+
                         $ctr++;
                     }
                 }
 
                 if($ctr > 0) {
                     mysqli_query($connection, "DELETE FROM `carts` WHERE `account_id`='$userID'");
+
+                    send_email($_SESSION['email'], 'Order #' . $trackingNumber . ' Checkout Details', '<!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>' . COMPANY_NAME . '</title>
+                            <style>
+                                body { font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
+                                h1, h2, h3, h4, h5, h6 { margin 0 0 10px 0; }
+                                p { margin: 0; }
+                                .content p { margin: 10px 0; }
+                                table { width: 100%; }
+                            </style>
+                        </head>
+                        <body>
+                            <h3>Dear ' . $_SESSION['first_name'] . ',</h3>
+                            <div class="content">
+                                <p>Greetings from BITC Cosmetics!</p>
+                                <p>This is to confirm your product purchase with the following detail:</p>
+                                <p>Please be advice that the official receipt will be provided by the delivery man after you receive your product.</p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>' . $tbodyContent . '</tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <th>' . $boomyAmount . '</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping Fee:</th>
+                                            <th>' . $shippingFee . '</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <p>Thank you for choosing BITC Cosmetics.</p>
+                            </div>
+                        </body>
+                        </html>', $_SESSION['full_name']);
 
                     echo json_encode([
                         'status' => 'Ok',
