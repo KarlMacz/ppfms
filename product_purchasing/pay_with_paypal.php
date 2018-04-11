@@ -25,7 +25,7 @@
                     $items[] = [
                         'name' => $row2['name'],
                         'quantity' => $row2['quantity'],
-                        'price' => $row2['total_amount'],
+                        'price' => ((double) $row2['total_amount'] / (double) $row2['quantity']),
                     ];
                 }
 
