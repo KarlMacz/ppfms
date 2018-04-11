@@ -63,9 +63,9 @@
                 $item->setName($paypalItem['name'])
                     ->setCurrency('PHP')
                     ->setQuantity($paypalItem['quantity'])
-                    ->setPrice($paypalItem['price'] / $paypalItem['quantity']);
+                    ->setPrice($paypalItem['price']);
 
-                $subtotal += $paypalItem['price'];
+                $subtotal += $paypalItem['price'] * $paypalItem['quantity'];
                 $items[] = $item;
             }
 
@@ -174,6 +174,10 @@
             $this->invoice = PayPalInvoice::get($invoiceID, $this->paypalApiContext);
         }
 
+        function get_invoice_id() {
+            return $this->invoice->getId();
+        }
+
         function parse_address($address) {
             $ch = curl_init();
 
@@ -186,7 +190,7 @@
                 return null;
             }
 
-            return $response;
+            return $response['results'][0]['address_components'];
         }
 
         function set_billing_info($firstName, $lastName, $email, $line, $city, $state, $postal, $countryCode) {
