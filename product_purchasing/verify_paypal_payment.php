@@ -41,7 +41,7 @@
 
                                     $result = $ppDeal->verify_transaction($paymentID, $payerID);
 
-                                    $query = mysqli_query($connection, "SELECT *
+                                    $query = mysqli_query($connection, "SELECT *,
                                             `orders`.`id` AS `ord_id`
                                         FROM `orders`
                                         INNER JOIN `accounts`
