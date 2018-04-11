@@ -126,7 +126,6 @@
                                         $date = date('Y-m-d');
 
                                         $ppVoiceOut->create_invoice();
-                                        $ppVoiceOut->send_invoice();
 
                                         $invoiceID = $ppVoiceOut->send_invoice();
                                         $invoiceLink = 'https://www.sandbox.paypal.com/invoice/payerView/details/' . $invoiceID;
