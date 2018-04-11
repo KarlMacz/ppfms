@@ -20,6 +20,7 @@
             $accountID = $row['account_id'];
             $_SESSION['user_id'] = $accountID;
             $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['email'];
             $_SESSION['type'] = $row['type'];
             
             if($row['middle_name'] != null) {
