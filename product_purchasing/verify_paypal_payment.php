@@ -93,7 +93,7 @@
                                         } else if($i = array_search('administrative_area_level_1', $ba['types'])) {
                                             $administrativeAreaLevel .= $ba['long_name'];
                                         } else if($i = array_search('country', $ba['types'])) {
-                                            $country .= $ba['short_name'];
+                                            $country .= substr($ba['short_name'], 0, 2);
                                         } else {
                                             $line .= $ba['long_name'];
                                         }
@@ -113,7 +113,7 @@
                                         } else if($i = array_search('administrative_area_level_1', $sa['types'])) {
                                             $administrativeAreaLevel .= $sa['long_name'];
                                         } else if($i = array_search('country', $sa['types'])) {
-                                            $country .= $sa['short_name'];
+                                            $country .= substr($sa['short_name'], 0, 2);
                                         } else {
                                             $line .= $sa['long_name'];
                                         }
