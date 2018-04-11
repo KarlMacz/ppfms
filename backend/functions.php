@@ -20,7 +20,20 @@
     use PayPal\Api\Transaction as PayPalTransaction;
     use PayPal\Api\RedirectUrls as PayPalRedirectUrls;
     use PayPal\Api\Payment as PayPalPayment;
+    use PayPal\Api\PaymentDetail as PayPalPaymentDetail;
     use PayPal\Api\PaymentExecution as PayPalPaymentExecution;
+    use PayPal\Api\Address as PayPalAddress;
+    use PayPal\Api\BillingInfo as PayPalBillingInfo;
+    use PayPal\Api\Cost as PayPalCost;
+    use PayPal\Api\Currency as PayPalCurrency;
+    use PayPal\Api\Invoice as PayPalInvoice;
+    use PayPal\Api\InvoiceAddress as PayPalInvoiceAddress;
+    use PayPal\Api\InvoiceItem as PayPalInvoiceItem;
+    use PayPal\Api\MerchantInfo as PayPalMerchantInfo;
+    use PayPal\Api\PaymentTerm as PayPalPaymentTerm;
+    use PayPal\Api\Phone as PayPalPhone;
+    use PayPal\Api\ShippingInfo as PayPalShippingInfo;
+    use PayPal\Api\Tax as PayPalTax;
 
     use Respect\Validation\Validator;
     use Respect\Validation\Exceptions\ValidationException;
@@ -109,6 +122,195 @@
             } catch(Exception $ex) {
                 return false;
             }
+        }
+    }
+
+    /*
+    * PayPalDeal Class
+    */
+    class PayPalVoiceOut {
+        private $invoice;
+        private $billing;
+        private $shipping;
+        private $items;
+        private $paypalApiContext;
+
+        function __construct() {
+            $this->paypalApiContext = new PayPalApiContext(
+                new PayPalOAuthTokenCredential(PAYPAL_CLIENT_ID, PAYPAL_SECRET)
+            );
+            $this->items = [];
+        }
+
+        function initialize_invoice() {
+            $this->invoice = new PayPalInvoice();
+
+            $this->invoice->setMerchantInfo(new PayPalMerchantInfo())
+                ->setBillingInfo([new PayPalBillingInfo()])
+                ->setNote('Order Invoice ' . date('F d, Y'))
+                ->setPaymentTerm(new PayPalPaymentTerm())
+                ->setShippingInfo(new PayPalShippingInfo());
+
+            $this->invoice->getMerchantInfo()
+                ->setEmail('lin.baywrigth069@bitc-ppfms.com')
+                ->setBusinessName(COMPANY_NAME)
+                ->setWebsite('https://bitccosmetics.com')
+                ->setPhone(new PayPalPhone())
+                ->setAddress(new PayPalAddress());
+
+            $this->invoice->getMerchantInfo()->getPhone()
+                ->setCountryCode('63')
+                ->setNationalNumber("8942028");
+
+            $this->invoice->getMerchantInfo()->getAddress()
+                ->setLine1("Kampri Bldg, 2254 Don Chino Roces Avenue")
+                ->setCity("Makati")
+                ->setState("Metro Manila")
+                ->setPostalCode("1233")
+                ->setCountryCode("PH");
+        }
+
+        function retrieve_existing_invoice($invoiceID) {
+            $this->invoice = PayPalInvoice::get($invoiceID, $this->paypalApiContext);
+        }
+
+        function parse_address($address) {
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBm8OIKZ7OtOykRclmFgfF9wRboRgnFGN8&address=' . urlencode('Sampaloc, Manila'));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            $response = json_decode(curl_exec($ch), true);
+
+            if($response['status'] !== 'OK') {
+                return null;
+            }
+
+            return $response;
+        }
+
+        function set_billing_info($firstName, $lastName, $email, $line, $city, $state, $postal, $countryCode) {
+            $this->billing = $this->invoice->getBillingInfo();
+
+            $this->billing[0]->setEmail($email)
+                ->setFirstName($firstName)
+                ->setLastName($lastName)
+                ->setBusinessName('Not applicable')
+                ->setPhone(new PayPalPhone())
+                ->setAddress(new PayPalAddress());
+
+            $this->billing[0]->getPhone()
+                ->setCountryCode('63')
+                ->setNationalNumber('9068563348');
+
+            $this->billing[0]->getAddress()
+                ->setLine1($line)
+                ->setCity($city)
+                ->setState($state)
+                ->setPostalCode($postal)
+                ->setCountryCode($countryCode);
+        }
+
+        function set_shipping_info($firstName, $lastName, $email, $line, $city, $state, $postal, $countryCode) {
+            $this->shipping = $this->invoice->getShippingInfo();
+
+            $this->shipping->setEmail($email)
+                ->setFirstName($firstName)
+                ->setLastName($lastName)
+                ->setBusinessName('Not applicable')
+                ->setPhone(new PayPalPhone())
+                ->setAddress(new PayPalAddress());
+
+            $this->shipping->getPhone()
+                ->setCountryCode('63')
+                ->setNationalNumber('9068563348');
+
+            $this->shipping->getAddress()
+                ->setLine1($line)
+                ->setCity($city)
+                ->setState($state)
+                ->setPostalCode($postal)
+                ->setCountryCode($countryCode);
+        }
+
+        function set_item_list($itemList) {
+            $this->items = [];
+
+            for($i = 0; $i < count($itemList); $i++) {
+                $this->items[$i] = new PayPalInvoiceItem();
+
+                $this->items[$i]->setName($itemList[$i]['name'])
+                    ->setQuantity($itemList[$i]['quantity'])
+                    ->setUnitPrice(new PayPalCurrency());
+
+                $this->items[$i]->getUnitPrice()
+                    ->setCurrency('PHP')
+                    ->setValue($itemList[$i]['price']);
+
+                $tax = new PayPalTax();
+                $tax->setPercent(1)->setName("Local Tax on Sutures");
+
+                $this->items[$i]->setTax($tax);
+            }
+
+            $this->invoice->setItems($this->items);
+        }
+
+        function create_invoice() {
+            $this->invoice->getPaymentTerm()
+                ->setTermType('NET_45');
+
+            $this->invoice->setLogoUrl('https://bitccosmetics.com/img/logo.png');
+
+            try {
+                $this->invoice->create($this->paypalApiContext);
+            } catch (Exception $ex) {
+                die('<pre>' . $ex . '</pre>');
+
+                return null;
+            }
+
+            return true;
+        }
+
+        function send_invoice() {
+            try {
+                $sendStatus = $this->invoice->send($this->paypalApiContext);
+            } catch (Exception $ex) {
+                die('<pre>' . $ex . '</pre>');
+
+                return null;
+            }
+        }
+
+        function get_invoice() {
+            try {
+                $returnedInvoice = PayPalInvoice::get($this->invoice->getId(), $this->paypalApiContext);
+            } catch (Exception $ex) {
+                die('<pre>' . $ex . '</pre>');
+
+                return null;
+            }
+
+            return $returnedInvoice;
+        }
+
+        function record_payment() {
+            $paymentDetail = new PayPalPaymentDetail('{
+                "method": "CASH",
+                "date": "' . date('Y-m-d H:i:s T') . '",
+                "note": "Payment received."
+            }');
+
+            try {
+                $recordStatus = $this->invoice->recordPayment($paymentDetail, $this->paypalApiContext);
+            } catch (Exception $ex) {
+                die('<pre>' . $ex . '</pre>');
+
+                return null;
+            }
+
+            return $recordStatus;
         }
     }
 
