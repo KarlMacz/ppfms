@@ -126,8 +126,9 @@
                                         $date = date('Y-m-d');
 
                                         $ppVoiceOut->create_invoice();
+                                        $ppVoiceOut->send_invoice();
 
-                                        $invoiceID = $ppVoiceOut->send_invoice();
+                                        $invoiceID = $ppVoiceOut->get_invoice_id();
                                         $invoiceLink = 'https://www.sandbox.paypal.com/invoice/payerView/details/' . $invoiceID;
 
                                         send_email($row['email'], 'Order #' . $trackingNumber . ' Invoice Details', '<!DOCTYPE html>
